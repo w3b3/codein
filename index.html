@@ -87,7 +87,6 @@ const Nav = ({ onApply, activeSection }) => {
     { id: "program", label: "Program" },
     { id: "how", label: "How it works" },
     { id: "talent", label: "Talent" },
-    { id: "roadmap", label: "Roadmap" },
     { id: "stories", label: "Stories" },
     { id: "faq", label: "FAQ" },
   ];
@@ -133,10 +132,10 @@ const Hero = ({ onApply, variant = "editorial" }) => {
             </div>
             {variant === "editorial" && (
               <h1>
-                North-bound<br/>
+                Brazilian<br/>
                 <em>engineering</em> <span className="accent">talent,</span><br/>
-                from São Paulo<br/>
-                to Toronto.
+                built for<br/>
+                North America.
               </h1>
             )}
             {variant === "direct" && (
@@ -156,8 +155,8 @@ const Hero = ({ onApply, variant = "editorial" }) => {
             )}
             <p className="hero-sub">
               Code in Canada matches rigorously-vetted Brazilian engineers with North American
-              companies — on aligned time zones, with work authorization, English fluency, and
-              a 12-week immersion before they join your team.
+              companies — on aligned time zones, English-fluent, and ready to contribute
+              from day one.
             </p>
             <div className="hero-cta">
               <button className="btn btn-primary btn-lg" onClick={onApply}>
@@ -168,7 +167,7 @@ const Hero = ({ onApply, variant = "editorial" }) => {
               </a>
             </div>
             <div className="hero-meta">
-              <span><strong>12 weeks</strong> immersion</span>
+              <span><strong>Full profile</strong> curation</span>
               <span><strong>EST / PST</strong> aligned</span>
               <span><strong>No recruiter fees</strong> for founding members</span>
             </div>
@@ -205,7 +204,7 @@ const Hero = ({ onApply, variant = "editorial" }) => {
             <div className="hero-foot">
               <span className="live">Accepting</span>
               <span>·</span>
-              <span>São Paulo · Toronto</span>
+              <span>Remote from Brazil</span>
             </div>
           </aside>
         </div>
@@ -306,21 +305,15 @@ const How = ({ onApply }) => {
     },
     {
       num: "04",
-      tag: "Relocate · 4 weeks",
-      title: "We handle the visas.",
-      desc: "C-11, GTS, or TN — our immigration partners file everything. You focus on the technical prep.",
+      tag: "Interviews · 1–2 weeks",
+      title: "Interview rounds.",
+      desc: "We coordinate and prep you for every round — technical and cultural. You show up; we handle the logistics.",
     },
     {
       num: "05",
-      tag: "Immerse · 12 weeks",
-      title: "12-week onboarding in Toronto.",
-      desc: "Paid residency with a partner company. Mentorship, systems design, async writing, and a real shipped project.",
-    },
-    {
-      num: "06",
       tag: "Ship · Day 1",
-      title: "Full-time hire. No placement fee.",
-      desc: "Convert to a full-time role on day 85. Founding-member companies pay zero placement fees for the first three hires.",
+      title: "Offer. Ship from day one.",
+      desc: "Accept your offer and start working remotely with your partner company. Median offer: USD $85K–$120K.",
     },
   ];
 
@@ -330,7 +323,7 @@ const How = ({ onApply }) => {
         <div className="section-head">
           <div>
             <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>How it works</div>
-            <h2>Six steps from<br/>application to offer.</h2>
+            <h2>Five steps from<br/>application to offer.</h2>
           </div>
           <p className="lede">
             We run three cohorts a year. Every engineer goes through the same rigorous pipeline —
@@ -379,24 +372,24 @@ const Talent = ({ onApply }) => {
       desc: "Brazil sits on EST and one hour off PST. Real overlap, real pairing, real standups — no late-night handoffs.",
     },
     {
-      icon: "shield",
-      title: "We handle the paperwork.",
-      desc: "Work authorization, immigration, payroll, and compliance — all done before day one. You hire, we handle the rest.",
-    },
-    {
-      icon: "briefcase",
-      title: "Try before you hire.",
-      desc: "A paid 12-week residency. If it&apos;s not a fit by week 8, you walk away — no fee, no friction.",
-    },
-    {
-      icon: "clock",
-      title: "Ready in 6 weeks.",
-      desc: "From signed LOI to first standup. Most engineers are productive on day one thanks to the immersion program.",
-    },
-    {
       icon: "chat",
       title: "English-fluent, async-literate.",
       desc: "Every candidate passes a structured English evaluation and a written-communication task. No translation debt.",
+    },
+    {
+      icon: "briefcase",
+      title: "No placement fee for founding members.",
+      desc: "The first 50 partner companies pay zero for their first three hires. Flat fee after that — no percentage of salary.",
+    },
+    {
+      icon: "spark",
+      title: "Remote-ready candidates.",
+      desc: "Every engineer is set up to work asynchronously, overlap EST/PST hours, and ship independently from day one.",
+    },
+    {
+      icon: "doc",
+      title: "Curated shortlists, not a dump.",
+      desc: "You receive 3–5 candidates per role, ranked. No screening fatigue; no cold inboxes.",
     },
   ];
 
@@ -407,24 +400,19 @@ const Talent = ({ onApply }) => {
       desc: "Work on real products shipped to millions — with mentorship from senior engineers at partner companies.",
     },
     {
-      icon: "shield",
-      title: "Relocation, done for you.",
-      desc: "Visa, flights, first-month housing in Toronto, and a $3,000 CAD relocation stipend — covered.",
+      icon: "globe",
+      title: "Work remotely from Brazil.",
+      desc: "No relocation required. Keep your life, your city, your time zone — and work with teams building products used by millions.",
     },
     {
       icon: "spark",
-      title: "12 weeks of immersion.",
-      desc: "Paid training in systems design, async writing, and technical English. Plus 1-on-1 career coaching.",
+      title: "We prep you for every round.",
+      desc: "Interview coaching, async writing feedback, and technical prep tailored to each company on your shortlist.",
     },
     {
       icon: "briefcase",
-      title: "Offer by day 85.",
-      desc: "Convert to full-time with the partner company. Median offer: CAD $115K + equity + benefits.",
-    },
-    {
-      icon: "globe",
-      title: "Canadian PR pathway.",
-      desc: "Eligible for Canada&apos;s Express Entry within 12 months. We cover legal counsel for your application.",
+      title: "Salary in USD or CAD.",
+      desc: "North American compensation, deposited in your preferred currency. Median offer: USD $85K–$120K.",
     },
     {
       icon: "chat",
@@ -477,128 +465,6 @@ const Talent = ({ onApply }) => {
 window.Talent = Talent;
 
 
-// === src/roadmap.jsx ===
-const Roadmap = () => {
-  const steps = [
-    {
-      week: "Week 1–2",
-      title: "Landing",
-      meta: "Arrival · Orientation",
-      bullets: [
-        "Airport pickup, SIM cards, and bank accounts",
-        "First-month housing in downtown Toronto",
-        "Cohort orientation + mentor pairing",
-        "Health insurance + legal onboarding",
-      ],
-      short: "Land in Toronto. Get set up.",
-    },
-    {
-      week: "Week 3–5",
-      title: "Foundations",
-      meta: "Systems · Async · English",
-      bullets: [
-        "Systems design: from CAP theorem to real rollouts",
-        "Async writing: RFCs, design docs, code reviews",
-        "English fluency lab: 1:1 speaking practice",
-        "Shadowing: sit in on real team meetings",
-      ],
-      short: "Level up the fundamentals.",
-    },
-    {
-      week: "Week 6–9",
-      title: "Residency",
-      meta: "Embedded with partner team",
-      bullets: [
-        "Assigned a real scoped project, shipped to production",
-        "Daily standups with your future team",
-        "Weekly 1:1s with your staff-level mentor",
-        "Code reviews from two senior engineers",
-      ],
-      short: "Ship real code with a real team.",
-    },
-    {
-      week: "Week 10–11",
-      title: "Match",
-      meta: "Company decisions · Offers",
-      bullets: [
-        "Feedback from all sides — you, the team, the mentor",
-        "Offer decision by end of week 10",
-        "Negotiation coaching from the Code in Canada team",
-        "Visa status transitions to permanent work authorization",
-      ],
-      short: "Decisions on both sides.",
-    },
-    {
-      week: "Week 12+",
-      title: "Launch",
-      meta: "Full-time · Day 1",
-      bullets: [
-        "Full-time start with your partner company",
-        "Alumni network access — 312 engineers, 42 companies",
-        "Quarterly check-ins for your first year",
-        "Eligible for Canadian PR pathway within 12 months",
-      ],
-      short: "Full-time, with alumni for life.",
-    },
-  ];
-
-  const [active, setActive] = useState(2); // Residency as default highlighted
-
-  const cur = steps[active];
-
-  return (
-    <section className="roadmap" id="roadmap">
-      <div className="container">
-        <div className="section-head" style={{ marginBottom: 40 }}>
-          <div>
-            <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>The 12-week roadmap</div>
-            <h2>From <em className="serif" style={{ fontStyle: "italic" }}>landing</em><br/>to launch.</h2>
-          </div>
-          <p className="lede">
-            A paid, structured immersion program. Every engineer follows the same five-phase path
-            — designed with input from staff engineers at Shopify, Stripe, and Wealthsimple.
-          </p>
-        </div>
-
-        <div className="roadmap-track" role="tablist">
-          <div className="roadmap-line" />
-          {steps.map((s, i) => (
-            <div
-              key={i}
-              role="tab"
-              aria-selected={i === active}
-              className={`roadmap-step ${i === active ? "active" : i < active ? "done" : ""}`}
-              onClick={() => setActive(i)}
-              onKeyDown={(e) => e.key === "Enter" && setActive(i)}
-              tabIndex={0}
-            >
-              <div className="week">{s.week}</div>
-              <h4>{s.title}</h4>
-              <p>{s.short}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="roadmap-detail">
-          <div>
-            <div className="meta">{cur.week} · {cur.meta}</div>
-            <h3>{cur.title}</h3>
-            <p style={{ color: "var(--muted)", fontSize: 15 }}>
-              Phase {active + 1} of 5. Click any step above to explore.
-            </p>
-          </div>
-          <ul className="bullets">
-            {cur.bullets.map((b, i) => <li key={i}>{b}</li>)}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-window.Roadmap = Roadmap;
-
-
 // === src/stories.jsx ===
 const Stories = () => {
   const items = [
@@ -609,7 +475,7 @@ const Stories = () => {
       initial: "P",
     },
     {
-      quote: "I landed in Toronto on a Tuesday and shipped to production by Friday of week 6. The residency is not a bootcamp — it's the real thing.",
+      quote: "I was in São Paulo on a Tuesday and shipping to production by the end of my first month. The match was precise — they knew exactly what I wanted and what the team needed.",
       name: "Lucas Ferreira",
       role: "SRE · COHORT 02",
       initial: "L",
@@ -662,7 +528,7 @@ const FAQ = () => {
   const items = [
     {
       q: "Who is Code in Canada for?",
-      a: "Two audiences. On one side: Brazilian engineers with 3+ years of experience who want to build their career in North America. On the other: North American companies (Canadian or US) hiring senior engineers who struggle to find time-zone aligned, English-fluent talent. We match them through a cohort-based program."
+      a: "Two audiences. Brazilian engineers with 3+ years of experience who want to work with North American companies — remotely, from Brazil. And North American companies hiring senior engineers who need time-zone aligned, English-fluent talent. We match them through a rigorous cohort-based process."
     },
     {
       q: "What roles do you place?",
@@ -670,23 +536,23 @@ const FAQ = () => {
     },
     {
       q: "How much does it cost companies?",
-      a: "Founding-member companies (the first 50) pay zero placement fees for their first three hires. After that, it's a one-time flat fee — no percentage of salary. We also cover the full cost of the 12-week residency program for the engineer."
+      a: "Founding-member companies (the first 50) pay zero placement fees for their first three hires. After that, it's a one-time flat fee — no percentage of salary."
     },
     {
       q: "Do engineers pay anything?",
-      a: "No. The program is free for engineers — including flights, first-month housing in Toronto, relocation stipend, and paid training. You're paid a living stipend during the residency, and your full-time salary starts on week 12."
+      a: "No. The process is entirely free for engineers. You apply, we screen, we match you — and you keep 100% of your offer."
     },
     {
-      q: "What about visas and work authorization?",
-      a: "Our immigration partners handle the full pipeline: C-11 (Canada), GTS (Global Talent Stream), or TN (for placements in the US). Most engineers land in Canada on a 2-year open work permit and are eligible for Express Entry (permanent residency) within 12 months."
+      q: "How does remote work with a North American company work legally?",
+      a: "Most placements are structured as contractor or employer-of-record (EOR) arrangements, which require no visa or relocation. We advise on the right structure for your situation and your partner company's jurisdiction."
     },
     {
-      q: "Why Canada, not directly to the US?",
-      a: "Canada's immigration pathways are faster, more predictable, and don't rely on a lottery. Engineers who start in Toronto can later transfer to US offices via TN visa. Many companies we work with have offices in both countries."
+      q: "Do engineers need to relocate?",
+      a: "No. Engineers work remotely from Brazil. The cohort model means you're matched alongside other vetted engineers, and companies know what to expect — but there's no physical move required."
     },
     {
       q: "What's the application timeline?",
-      a: "From application to offer: roughly 8-10 weeks. From offer to landing in Toronto: another 4-6 weeks (mostly visa processing). The 12-week residency starts on a fixed cohort start date — currently June, October, and February."
+      a: "From application to offer: roughly 6–10 weeks. We run three cohorts a year — currently June, October, and February. Engineers in the cohort are presented to partner companies over a 2-week match window."
     },
   ];
 
@@ -788,7 +654,7 @@ const ApplyModal = ({ open, onClose, audience: initialAudience = "engineer" }) =
                 onClick={() => setAudience("engineer")}
               >
                 <div style={{ fontWeight: 500, marginBottom: 4 }}>I&apos;m a Brazilian engineer</div>
-                <div style={{ fontSize: 13, opacity: 0.7 }}>Applying to join a cohort and relocate to Canada.</div>
+                <div style={{ fontSize: 13, opacity: 0.7 }}>Applying to work remotely with North American companies.</div>
               </button>
               <button
                 className={`chip ${audience === "company" ? "selected" : ""}`}
@@ -1019,257 +885,6 @@ const Tweaks = ({ tweaks, setTweaks, onClose }) => {
 window.Tweaks = Tweaks;
 
 
-// === src/flow.jsx ===
-const FlowJourneyMap = ({ stepIdx }) => {
-  const W = 400, H = 360;
-  const SP = { x: 318, y: 295 };
-  const TO = { x: 76, y: 58 };
-  const CP = { x: 52, y: 210 };
-
-  const B = (t, p0, p1, p2) => ({
-    x: (1-t)*(1-t)*p0.x + 2*(1-t)*t*p1.x + t*t*p2.x,
-    y: (1-t)*(1-t)*p0.y + 2*(1-t)*t*p1.y + t*t*p2.y,
-  });
-
-  const checkpoints = [0, 0.2, 0.4, 0.6, 0.8, 1].map((t, i) => ({ ...B(t, SP, CP, TO), t, i }));
-  const traveler = checkpoints[stepIdx];
-  const fillT = stepIdx / 5;
-
-  const dotGrid = [];
-  for (let r = 0; r < 7; r++)
-    for (let c = 0; c < 8; c++)
-      dotGrid.push({ x: c * 52 + 22, y: r * 52 + 22 });
-
-  return (
-    <div className="flow-map-wrap" style={{
-      background: "rgba(246,243,236,0.03)",
-      border: "1px solid rgba(246,243,236,0.07)",
-      borderRadius: 16, padding: 8,
-      display: "flex", justifyContent: "center", alignItems: "center",
-    }}>
-      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ display: "block", overflow: "visible" }}>
-        {dotGrid.map((d, i) => (
-          <circle key={i} cx={d.x} cy={d.y} r={1.2} style={{ fill: "rgba(246,243,236,0.05)" }} />
-        ))}
-
-        {/* Ghost path */}
-        <path d={`M ${SP.x} ${SP.y} Q ${CP.x} ${CP.y} ${TO.x} ${TO.y}`}
-          fill="none" stroke="rgba(246,243,236,0.08)" strokeWidth="1.5" strokeDasharray="5 5" />
-
-        {/* Progress path */}
-        <path d={`M ${SP.x} ${SP.y} Q ${CP.x} ${CP.y} ${TO.x} ${TO.y}`}
-          fill="none" strokeWidth="2" pathLength="1"
-          strokeDasharray="1" strokeDashoffset={1 - fillT}
-          style={{ stroke: "rgba(228,87,46,0.65)", transition: "stroke-dashoffset .7s ease" }} />
-
-        {/* Checkpoints */}
-        {checkpoints.map(({ x, y, i }) => {
-          const done = i <= stepIdx;
-          const active = i === stepIdx;
-          return (
-            <g key={i}>
-              {active && <circle cx={x} cy={y} r={13} style={{ fill: "rgba(228,87,46,0.12)", animation: "pulse 2s ease-in-out infinite" }} />}
-              <circle cx={x} cy={y} r={4.5}
-                style={{ fill: done ? "#E4572E" : "rgba(246,243,236,0.15)", transition: "fill .4s ease" }} />
-              <text x={x + (x > W / 2 ? -14 : 13)} y={y + 4}
-                style={{ fill: "rgba(246,243,236,0.28)", fontSize: 9, fontFamily: "'Geist Mono',monospace", letterSpacing: "0.08em" }}
-                textAnchor={x > W / 2 ? "end" : "start"}>
-                {String(i + 1).padStart(2, "0")}
-              </text>
-            </g>
-          );
-        })}
-
-        {/* Traveler */}
-        <g style={{ transform: `translate(${traveler.x}px,${traveler.y}px)`, transition: "transform .7s cubic-bezier(.4,0,.2,1)" }}>
-          <circle cx={0} cy={0} r={10} style={{ fill: "rgba(246,243,236,0.1)" }} />
-          <circle cx={0} cy={0} r={5} style={{ fill: "#F6F3EC" }} />
-          <circle cx={0} cy={0} r={2.5} style={{ fill: "#E4572E" }} />
-        </g>
-
-        {/* Origin: São Paulo */}
-        <circle cx={SP.x} cy={SP.y} r={6} style={{ fill: "rgba(232,184,74,0.85)" }} />
-        <text x={SP.x - 12} y={SP.y - 12} textAnchor="end"
-          style={{ fill: "rgba(246,243,236,0.7)", fontSize: 11, fontFamily: "'Geist Mono',monospace", letterSpacing: "0.06em" }}>São Paulo</text>
-        <text x={SP.x - 12} y={SP.y + 2} textAnchor="end"
-          style={{ fill: "rgba(246,243,236,0.32)", fontSize: 9, fontFamily: "'Geist Mono',monospace" }}>BR · GMT−3</text>
-
-        {/* Destination: Toronto */}
-        <circle cx={TO.x} cy={TO.y} r={6}
-          style={{ fill: stepIdx >= 4 ? "#E4572E" : "rgba(246,243,236,0.28)", transition: "fill .5s ease" }} />
-        <text x={TO.x + 14} y={TO.y - 4}
-          style={{ fill: "rgba(246,243,236,0.7)", fontSize: 11, fontFamily: "'Geist Mono',monospace", letterSpacing: "0.06em" }}>Toronto</text>
-        <text x={TO.x + 14} y={TO.y + 10}
-          style={{ fill: "rgba(246,243,236,0.32)", fontSize: 9, fontFamily: "'Geist Mono',monospace" }}>CA · EST</text>
-
-        {/* Status badge */}
-        <rect x={148} y={162} width={116} height={52} rx={10}
-          style={{ fill: "rgba(14,33,24,0.85)", stroke: "rgba(246,243,236,0.09)", strokeWidth: 1 }} />
-        <text x={206} y={184} textAnchor="middle"
-          style={{ fill: "#E4572E", fontSize: 9, fontFamily: "'Geist Mono',monospace", letterSpacing: "0.14em" }}>
-          {String(stepIdx + 1).padStart(2, "0")} / 06
-        </text>
-        <text x={206} y={202} textAnchor="middle"
-          style={{ fill: "rgba(246,243,236,0.75)", fontSize: 11, fontFamily: "'Instrument Serif',serif" }}>
-          {["Apply","Screen","Offer","Relocate","Immerse","Ship"][stepIdx]}
-        </text>
-      </svg>
-    </div>
-  );
-};
-
-const FlowAnimation = ({ onApply }) => {
-  const DURATION = 4500;
-  const steps = [
-    { num: "01", tag: "Apply · 20 min",    title: "Tell us your story.",             desc: "A short written application: your background, a code sample, and the role you want. English + Portuguese accepted.", city: "São Paulo, BR" },
-    { num: "02", tag: "Screen · 1 week",   title: "Technical & language screens.",   desc: "A live pairing session with a senior engineer and a structured English interview. We score on reasoning — not trivia.", city: "São Paulo, BR" },
-    { num: "03", tag: "Offer · 2 weeks",   title: "Cohort offer + match call.",      desc: "The top 1.8% receive an offer. You meet three partner companies aligned with your stack and career stage.", city: "São Paulo, BR" },
-    { num: "04", tag: "Relocate · 4 weeks", title: "We handle the visas.", desc: "C-11, GTS, or TN — our immigration partners file everything. You focus on the technical prep.", city: "SP → Toronto" },
-    { num: "05", tag: "Immerse · 12 weeks", title: "Onboarding in Toronto.", desc: "Paid residency with a partner company. Real shipped code, daily standups, and 1:1 mentorship from staff engineers.", city: "Toronto, CA" },
-    { num: "06", tag: "Ship · Day 1",      title: "Full-time. No placement fee.",    desc: "Convert to a full-time role on day 85. Founding-member companies pay zero placement fees for the first three hires.", city: "Toronto, CA" },
-  ];
-
-  const [idx, setIdx] = useState(0);
-  const [progKey, setProgKey] = useState(0);
-  const [playing, setPlaying] = useState(true);
-
-  useEffect(() => {
-    if (!playing) return;
-    const id = setInterval(() => {
-      setIdx(i => (i + 1) % steps.length);
-      setProgKey(k => k + 1);
-    }, DURATION);
-    return () => clearInterval(id);
-  }, [playing]);
-
-  const goTo = (i) => { setIdx(i); setProgKey(k => k + 1); };
-  const cur = steps[idx];
-
-  return (
-    <section className="flow-section">
-      {/* Per-step progress bar */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "rgba(246,243,236,0.08)" }}>
-        <div key={`pb-${progKey}`} style={{
-          height: "100%", background: "#E4572E",
-          animation: playing ? `progressFill ${DURATION}ms linear forwards` : "none",
-          width: playing ? undefined : "0%",
-        }} />
-      </div>
-
-      {/* Step counter strip */}
-      <div style={{
-        position: "absolute", top: 0, left: 0, right: 0, display: "flex",
-        pointerEvents: "none",
-      }}>
-        {steps.map((_, i) => (
-          <div key={i} style={{
-            flex: 1, height: 2,
-            background: i < idx ? "rgba(228,87,46,0.35)" : "transparent",
-          }} />
-        ))}
-      </div>
-
-      <div className="container">
-        <div className="flow-grid">
-          {/* Left: step content */}
-          <div style={{ position: "relative" }}>
-            <div style={{
-              position: "absolute", top: -32, left: -12,
-              fontFamily: "var(--serif)", fontSize: 220, lineHeight: 1, fontWeight: 400,
-              color: "rgba(246,243,236,0.04)", userSelect: "none", pointerEvents: "none",
-              letterSpacing: "-0.04em",
-            }}>{cur.num}</div>
-
-            <div key={`c-${idx}`} style={{ animation: "flowStepIn .45s cubic-bezier(.2,.9,.3,1) both" }}>
-              <div style={{
-                display: "flex", alignItems: "center", gap: 8,
-                fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.14em",
-                textTransform: "uppercase", color: "#E4572E", marginBottom: 20,
-              }}>
-                <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#E4572E", display: "inline-block" }} />
-                {cur.tag}
-              </div>
-
-              <h2 style={{
-                fontFamily: "var(--serif)", fontWeight: 400,
-                fontSize: "clamp(34px, 4vw, 58px)",
-                lineHeight: 1.07, color: "#F6F3EC",
-                marginBottom: 20, letterSpacing: "-0.025em",
-              }}>{cur.title}</h2>
-
-              <p style={{
-                fontSize: 17, color: "rgba(246,243,236,0.55)",
-                maxWidth: "42ch", lineHeight: 1.58, marginBottom: 28,
-              }}>{cur.desc}</p>
-
-              <div style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                fontFamily: "var(--mono)", fontSize: 11,
-                color: "rgba(246,243,236,0.32)",
-                letterSpacing: "0.12em", textTransform: "uppercase",
-              }}>
-                <Icon name="compass" size={12} />
-                {cur.city}
-              </div>
-            </div>
-
-            {/* Nav dots + controls */}
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 44, flexWrap: "wrap" }}>
-              {steps.map((_, i) => (
-                <button key={i} onClick={() => goTo(i)} aria-label={`Step ${i + 1}`} style={{
-                  height: 6,
-                  width: i === idx ? 28 : 6,
-                  borderRadius: 3, border: "none", padding: 0, cursor: "pointer",
-                  background: i < idx
-                    ? "rgba(228,87,46,0.45)"
-                    : i === idx ? "#E4572E" : "rgba(246,243,236,0.14)",
-                  transition: "all .3s ease",
-                }} />
-              ))}
-              <button onClick={() => setPlaying(p => !p)} style={{
-                marginLeft: 10, border: "none", background: "none", cursor: "pointer",
-                color: "rgba(246,243,236,0.32)", padding: "4px 8px",
-                fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase",
-                display: "flex", alignItems: "center", gap: 6, transition: "color .2s ease",
-              }}
-                onMouseEnter={e => e.currentTarget.style.color = "rgba(246,243,236,0.65)"}
-                onMouseLeave={e => e.currentTarget.style.color = "rgba(246,243,236,0.32)"}
-              >
-                {playing
-                  ? <svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor"><rect x="1.5" y="1" width="3" height="9" rx="1"/><rect x="6.5" y="1" width="3" height="9" rx="1"/></svg>
-                  : <svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor"><path d="M2 1.5L10 5.5L2 9.5V1.5Z"/></svg>
-                }
-                {playing ? "Pause" : "Play"}
-              </button>
-              <button onClick={onApply} style={{
-                marginLeft: "auto", border: "1px solid rgba(246,243,236,0.2)", borderRadius: 999,
-                background: "none", cursor: "pointer", padding: "8px 16px",
-                color: "rgba(246,243,236,0.7)", fontFamily: "var(--sans)", fontSize: 13,
-                display: "flex", alignItems: "center", gap: 6, transition: "border-color .2s ease, color .2s ease",
-              }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(246,243,236,0.6)"; e.currentTarget.style.color = "#F6F3EC"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(246,243,236,0.2)"; e.currentTarget.style.color = "rgba(246,243,236,0.7)"; }}
-              >
-                Apply now <Icon name="arrow-right" size={13} />
-              </button>
-            </div>
-          </div>
-
-          {/* Right: journey map */}
-          <FlowJourneyMap stepIdx={idx} />
-        </div>
-      </div>
-
-      {/* Ambient glow */}
-      <div style={{
-        position: "absolute", inset: 0, pointerEvents: "none",
-        background: "radial-gradient(ellipse at 72% 50%, rgba(228,87,46,0.07) 0%, transparent 65%)",
-      }} />
-    </section>
-  );
-};
-
-window.FlowAnimation = FlowAnimation;
 
 
 // === src/app.jsx ===
@@ -1280,8 +895,8 @@ const Footer = () => (
         <div className="footer-brand">
           <img src="assets/logo-codein-recruiting.png" alt="Code in Canada Recruiting" style={{ height: 40, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.9, marginBottom: 16 }} />
           <p>
-            A Canadian startup helping the best Brazilian engineers build their careers with
-            North American teams. Based in Toronto &amp; São Paulo.
+            A recruiting company connecting rigorously-vetted Brazilian engineers with
+            North American teams. Remote-first. Three cohorts a year.
           </p>
           <div style={{ marginTop: 24, display: "flex", gap: 12 }}>
             <div className="pill" style={{ background: "rgba(246,243,236,0.06)", color: "rgba(246,243,236,0.7)", borderColor: "rgba(246,243,236,0.12)" }}>
@@ -1294,7 +909,6 @@ const Footer = () => (
           <h4>Program</h4>
           <ul>
             <li><a href="#how">How it works</a></li>
-            <li><a href="#roadmap">Roadmap</a></li>
             <li><a href="#talent">For companies</a></li>
             <li><a href="#talent">For engineers</a></li>
           </ul>
@@ -1311,9 +925,9 @@ const Footer = () => (
         <div className="footer-col">
           <h4>Resources</h4>
           <ul>
-            <li><a href="#">Visa guide</a></li>
             <li><a href="#">Engineer handbook</a></li>
             <li><a href="#">Employer brief</a></li>
+            <li><a href="#">Remote work guide</a></li>
             <li><a href="#">Alumni</a></li>
           </ul>
         </div>
@@ -1387,7 +1001,7 @@ const App = () => {
 
   // Section-spy for nav highlighting
   useEffect(() => {
-    const ids = ["program", "how", "talent", "roadmap", "stories", "faq"];
+    const ids = ["program", "how", "talent", "stories", "faq"];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(e => {
@@ -1410,7 +1024,6 @@ const App = () => {
       <Nav onApply={onApply} activeSection={activeSection} />
       <main id="program">
         <Hero onApply={onApply} variant={tweaks.heroVariant} />
-        <FlowAnimation onApply={onApply} />
         <Ticker />
         {tweaks.showStats && <Stats />}
         <LogoRow />
@@ -1419,7 +1032,6 @@ const App = () => {
         </div>
         <How onApply={onApply} />
         <Talent onApply={onApply} />
-        <Roadmap />
         <Stories />
         <FAQ />
         <CTABand onApply={onApply} />
