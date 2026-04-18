@@ -630,6 +630,34 @@ p { margin: 0; }
 }
 @keyframes bounce { 0% { transform: scale(0) } 100% { transform: scale(1) } }
 
+/* Flow animation section */
+@keyframes flowStepIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes progressFill {
+  from { width: 0 }
+  to   { width: 100% }
+}
+.flow-section {
+  background: var(--primary-ink);
+  color: #F6F3EC;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0 72px;
+}
+.flow-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 72px;
+  align-items: center;
+  min-height: 460px;
+}
+@media (max-width: 880px) {
+  .flow-grid { grid-template-columns: 1fr; gap: 36px; min-height: auto; }
+  .flow-map-wrap { display: none; }
+}
+
 /* Tweaks panel */
 .tweaks {
   position: fixed; bottom: 24px; right: 24px;
@@ -1678,6 +1706,259 @@ const Tweaks = ({ tweaks, setTweaks, onClose }) => {
 window.Tweaks = Tweaks;
 
 
+// === src/flow.jsx ===
+const FlowJourneyMap = ({ stepIdx }) => {
+  const W = 400, H = 360;
+  const SP = { x: 318, y: 295 };
+  const TO = { x: 76, y: 58 };
+  const CP = { x: 52, y: 210 };
+
+  const B = (t, p0, p1, p2) => ({
+    x: (1-t)*(1-t)*p0.x + 2*(1-t)*t*p1.x + t*t*p2.x,
+    y: (1-t)*(1-t)*p0.y + 2*(1-t)*t*p1.y + t*t*p2.y,
+  });
+
+  const checkpoints = [0, 0.2, 0.4, 0.6, 0.8, 1].map((t, i) => ({ ...B(t, SP, CP, TO), t, i }));
+  const traveler = checkpoints[stepIdx];
+  const fillT = stepIdx / 5;
+
+  const dotGrid = [];
+  for (let r = 0; r < 7; r++)
+    for (let c = 0; c < 8; c++)
+      dotGrid.push({ x: c * 52 + 22, y: r * 52 + 22 });
+
+  return (
+    <div className="flow-map-wrap" style={{
+      background: "rgba(246,243,236,0.03)",
+      border: "1px solid rgba(246,243,236,0.07)",
+      borderRadius: 16, padding: 8,
+      display: "flex", justifyContent: "center", alignItems: "center",
+    }}>
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ display: "block", overflow: "visible" }}>
+        {dotGrid.map((d, i) => (
+          <circle key={i} cx={d.x} cy={d.y} r={1.2} style={{ fill: "rgba(246,243,236,0.05)" }} />
+        ))}
+
+        {/* Ghost path */}
+        <path d={`M ${SP.x} ${SP.y} Q ${CP.x} ${CP.y} ${TO.x} ${TO.y}`}
+          fill="none" stroke="rgba(246,243,236,0.08)" strokeWidth="1.5" strokeDasharray="5 5" />
+
+        {/* Progress path */}
+        <path d={`M ${SP.x} ${SP.y} Q ${CP.x} ${CP.y} ${TO.x} ${TO.y}`}
+          fill="none" strokeWidth="2" pathLength="1"
+          strokeDasharray="1" strokeDashoffset={1 - fillT}
+          style={{ stroke: "rgba(228,87,46,0.65)", transition: "stroke-dashoffset .7s ease" }} />
+
+        {/* Checkpoints */}
+        {checkpoints.map(({ x, y, i }) => {
+          const done = i <= stepIdx;
+          const active = i === stepIdx;
+          return (
+            <g key={i}>
+              {active && <circle cx={x} cy={y} r={13} style={{ fill: "rgba(228,87,46,0.12)", animation: "pulse 2s ease-in-out infinite" }} />}
+              <circle cx={x} cy={y} r={4.5}
+                style={{ fill: done ? "#E4572E" : "rgba(246,243,236,0.15)", transition: "fill .4s ease" }} />
+              <text x={x + (x > W / 2 ? -14 : 13)} y={y + 4}
+                style={{ fill: "rgba(246,243,236,0.28)", fontSize: 9, fontFamily: "'Geist Mono',monospace", letterSpacing: "0.08em" }}
+                textAnchor={x > W / 2 ? "end" : "start"}>
+                {String(i + 1).padStart(2, "0")}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Traveler */}
+        <g style={{ transform: `translate(${traveler.x}px,${traveler.y}px)`, transition: "transform .7s cubic-bezier(.4,0,.2,1)" }}>
+          <circle cx={0} cy={0} r={10} style={{ fill: "rgba(246,243,236,0.1)" }} />
+          <circle cx={0} cy={0} r={5} style={{ fill: "#F6F3EC" }} />
+          <circle cx={0} cy={0} r={2.5} style={{ fill: "#E4572E" }} />
+        </g>
+
+        {/* Origin: São Paulo */}
+        <circle cx={SP.x} cy={SP.y} r={6} style={{ fill: "rgba(232,184,74,0.85)" }} />
+        <text x={SP.x - 12} y={SP.y - 12} textAnchor="end"
+          style={{ fill: "rgba(246,243,236,0.7)", fontSize: 11, fontFamily: "'Geist Mono',monospace", letterSpacing: "0.06em" }}>São Paulo</text>
+        <text x={SP.x - 12} y={SP.y + 2} textAnchor="end"
+          style={{ fill: "rgba(246,243,236,0.32)", fontSize: 9, fontFamily: "'Geist Mono',monospace" }}>BR · GMT−3</text>
+
+        {/* Destination: Toronto */}
+        <circle cx={TO.x} cy={TO.y} r={6}
+          style={{ fill: stepIdx >= 4 ? "#E4572E" : "rgba(246,243,236,0.28)", transition: "fill .5s ease" }} />
+        <text x={TO.x + 14} y={TO.y - 4}
+          style={{ fill: "rgba(246,243,236,0.7)", fontSize: 11, fontFamily: "'Geist Mono',monospace", letterSpacing: "0.06em" }}>Toronto</text>
+        <text x={TO.x + 14} y={TO.y + 10}
+          style={{ fill: "rgba(246,243,236,0.32)", fontSize: 9, fontFamily: "'Geist Mono',monospace" }}>CA · EST</text>
+
+        {/* Status badge */}
+        <rect x={148} y={162} width={116} height={52} rx={10}
+          style={{ fill: "rgba(14,33,24,0.85)", stroke: "rgba(246,243,236,0.09)", strokeWidth: 1 }} />
+        <text x={206} y={184} textAnchor="middle"
+          style={{ fill: "#E4572E", fontSize: 9, fontFamily: "'Geist Mono',monospace", letterSpacing: "0.14em" }}>
+          {String(stepIdx + 1).padStart(2, "0")} / 06
+        </text>
+        <text x={206} y={202} textAnchor="middle"
+          style={{ fill: "rgba(246,243,236,0.75)", fontSize: 11, fontFamily: "'Instrument Serif',serif" }}>
+          {["Apply","Screen","Offer","Relocate","Immerse","Ship"][stepIdx]}
+        </text>
+      </svg>
+    </div>
+  );
+};
+
+const FlowAnimation = ({ onApply }) => {
+  const DURATION = 4500;
+  const steps = [
+    { num: "01", tag: "Apply · 20 min",    title: "Tell us your story.",             desc: "A short written application: your background, a code sample, and the role you want. English + Portuguese accepted.", city: "São Paulo, BR" },
+    { num: "02", tag: "Screen · 1 week",   title: "Technical & language screens.",   desc: "A live pairing session with a senior engineer and a structured English interview. We score on reasoning — not trivia.", city: "São Paulo, BR" },
+    { num: "03", tag: "Offer · 2 weeks",   title: "Cohort offer + match call.",      desc: "The top 1.8% receive an offer. You meet three partner companies aligned with your stack and career stage.", city: "São Paulo, BR" },
+    { num: "04", tag: "Relocate · 4 weeks", title: "We handle the visas.", desc: "C-11, GTS, or TN — our immigration partners file everything. You focus on the technical prep.", city: "SP → Toronto" },
+    { num: "05", tag: "Immerse · 12 weeks", title: "Onboarding in Toronto.", desc: "Paid residency with a partner company. Real shipped code, daily standups, and 1:1 mentorship from staff engineers.", city: "Toronto, CA" },
+    { num: "06", tag: "Ship · Day 1",      title: "Full-time. No placement fee.",    desc: "Convert to a full-time role on day 85. Founding-member companies pay zero placement fees for the first three hires.", city: "Toronto, CA" },
+  ];
+
+  const [idx, setIdx] = useState(0);
+  const [progKey, setProgKey] = useState(0);
+  const [playing, setPlaying] = useState(true);
+
+  useEffect(() => {
+    if (!playing) return;
+    const id = setInterval(() => {
+      setIdx(i => (i + 1) % steps.length);
+      setProgKey(k => k + 1);
+    }, DURATION);
+    return () => clearInterval(id);
+  }, [playing]);
+
+  const goTo = (i) => { setIdx(i); setProgKey(k => k + 1); };
+  const cur = steps[idx];
+
+  return (
+    <section className="flow-section">
+      {/* Per-step progress bar */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: "rgba(246,243,236,0.08)" }}>
+        <div key={`pb-${progKey}`} style={{
+          height: "100%", background: "#E4572E",
+          animation: playing ? `progressFill ${DURATION}ms linear forwards` : "none",
+          width: playing ? undefined : "0%",
+        }} />
+      </div>
+
+      {/* Step counter strip */}
+      <div style={{
+        position: "absolute", top: 0, left: 0, right: 0, display: "flex",
+        pointerEvents: "none",
+      }}>
+        {steps.map((_, i) => (
+          <div key={i} style={{
+            flex: 1, height: 2,
+            background: i < idx ? "rgba(228,87,46,0.35)" : "transparent",
+          }} />
+        ))}
+      </div>
+
+      <div className="container">
+        <div className="flow-grid">
+          {/* Left: step content */}
+          <div style={{ position: "relative" }}>
+            <div style={{
+              position: "absolute", top: -32, left: -12,
+              fontFamily: "var(--serif)", fontSize: 220, lineHeight: 1, fontWeight: 400,
+              color: "rgba(246,243,236,0.04)", userSelect: "none", pointerEvents: "none",
+              letterSpacing: "-0.04em",
+            }}>{cur.num}</div>
+
+            <div key={`c-${idx}`} style={{ animation: "flowStepIn .45s cubic-bezier(.2,.9,.3,1) both" }}>
+              <div style={{
+                display: "flex", alignItems: "center", gap: 8,
+                fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.14em",
+                textTransform: "uppercase", color: "#E4572E", marginBottom: 20,
+              }}>
+                <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#E4572E", display: "inline-block" }} />
+                {cur.tag}
+              </div>
+
+              <h2 style={{
+                fontFamily: "var(--serif)", fontWeight: 400,
+                fontSize: "clamp(34px, 4vw, 58px)",
+                lineHeight: 1.07, color: "#F6F3EC",
+                marginBottom: 20, letterSpacing: "-0.025em",
+              }}>{cur.title}</h2>
+
+              <p style={{
+                fontSize: 17, color: "rgba(246,243,236,0.55)",
+                maxWidth: "42ch", lineHeight: 1.58, marginBottom: 28,
+              }}>{cur.desc}</p>
+
+              <div style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                fontFamily: "var(--mono)", fontSize: 11,
+                color: "rgba(246,243,236,0.32)",
+                letterSpacing: "0.12em", textTransform: "uppercase",
+              }}>
+                <Icon name="compass" size={12} />
+                {cur.city}
+              </div>
+            </div>
+
+            {/* Nav dots + controls */}
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 44, flexWrap: "wrap" }}>
+              {steps.map((_, i) => (
+                <button key={i} onClick={() => goTo(i)} aria-label={`Step ${i + 1}`} style={{
+                  height: 6,
+                  width: i === idx ? 28 : 6,
+                  borderRadius: 3, border: "none", padding: 0, cursor: "pointer",
+                  background: i < idx
+                    ? "rgba(228,87,46,0.45)"
+                    : i === idx ? "#E4572E" : "rgba(246,243,236,0.14)",
+                  transition: "all .3s ease",
+                }} />
+              ))}
+              <button onClick={() => setPlaying(p => !p)} style={{
+                marginLeft: 10, border: "none", background: "none", cursor: "pointer",
+                color: "rgba(246,243,236,0.32)", padding: "4px 8px",
+                fontFamily: "var(--mono)", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase",
+                display: "flex", alignItems: "center", gap: 6, transition: "color .2s ease",
+              }}
+                onMouseEnter={e => e.currentTarget.style.color = "rgba(246,243,236,0.65)"}
+                onMouseLeave={e => e.currentTarget.style.color = "rgba(246,243,236,0.32)"}
+              >
+                {playing
+                  ? <svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor"><rect x="1.5" y="1" width="3" height="9" rx="1"/><rect x="6.5" y="1" width="3" height="9" rx="1"/></svg>
+                  : <svg width="11" height="11" viewBox="0 0 11 11" fill="currentColor"><path d="M2 1.5L10 5.5L2 9.5V1.5Z"/></svg>
+                }
+                {playing ? "Pause" : "Play"}
+              </button>
+              <button onClick={onApply} style={{
+                marginLeft: "auto", border: "1px solid rgba(246,243,236,0.2)", borderRadius: 999,
+                background: "none", cursor: "pointer", padding: "8px 16px",
+                color: "rgba(246,243,236,0.7)", fontFamily: "var(--sans)", fontSize: 13,
+                display: "flex", alignItems: "center", gap: 6, transition: "border-color .2s ease, color .2s ease",
+              }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(246,243,236,0.6)"; e.currentTarget.style.color = "#F6F3EC"; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(246,243,236,0.2)"; e.currentTarget.style.color = "rgba(246,243,236,0.7)"; }}
+              >
+                Apply now <Icon name="arrow-right" size={13} />
+              </button>
+            </div>
+          </div>
+
+          {/* Right: journey map */}
+          <FlowJourneyMap stepIdx={idx} />
+        </div>
+      </div>
+
+      {/* Ambient glow */}
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: "radial-gradient(ellipse at 72% 50%, rgba(228,87,46,0.07) 0%, transparent 65%)",
+      }} />
+    </section>
+  );
+};
+
+window.FlowAnimation = FlowAnimation;
+
+
 // === src/app.jsx ===
 const Footer = () => (
   <footer className="footer">
@@ -1816,6 +2097,7 @@ const App = () => {
       <Nav onApply={onApply} activeSection={activeSection} />
       <main id="program">
         <Hero onApply={onApply} variant={tweaks.heroVariant} />
+        <FlowAnimation onApply={onApply} />
         <Ticker />
         {tweaks.showStats && <Stats />}
         <LogoRow />
