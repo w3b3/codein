@@ -11,7 +11,7 @@ rsync -av --delete --exclude='.DS_Store' \
   assets \
   xps15:/home/ds/home-server-setup/data/nginx/html/codein/
 
-rsync -av "$TMP" \
+rsync -av --chmod=644 "$TMP" \
   xps15:/home/ds/home-server-setup/data/nginx/html/codein/index.html
 
 rm "$TMP"
