@@ -159,6 +159,12 @@ p { margin: 0; }
 .lang { color: var(--muted); }
 .lang:hover { color: var(--ink); }
 
+@media (max-width: 720px) {
+  .nav-links { display: none; }
+  .lang, .nav-right .btn-ghost { display: none; }
+  .nav-inner { height: 56px; }
+}
+
 /* Real logo in nav */
 .brand-logo {
   height: 28px; width: auto; display: block;

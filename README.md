@@ -83,7 +83,7 @@ Run from the repo root on your local machine:
 ```bash
 rsync -av --delete --exclude='.DS_Store' \
   index.html \
-  assets/ \
+  assets \
   xps15:/home/ds/home-server-setup/data/nginx/html/codein/
 ```
 
