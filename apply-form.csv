@@ -1,0 +1,12 @@
+Question,Type,Options,Path
+Who are you?,Multiple choice,"I'm a Brazilian engineer,I'm hiring engineers",Both
+Full name,Short answer,,Both
+Email,Short answer,,Both
+Years of experience,Dropdown,"3–5 years,5–8 years,8–12 years,12+ years",Engineer
+Current city,Short answer,,Engineer
+What do you build?,Checkboxes,"Backend,Frontend,Full-stack,Mobile,Infra/SRE,Data,ML",Engineer
+Why Code in Canada?,Paragraph,,Engineer
+Company,Short answer,,Company
+Your role,Short answer,,Company
+Who are you hiring?,Checkboxes,"Backend,Frontend,Full-stack,Mobile,Infra/SRE,Data,ML",Company
+What roles are hardest to fill?,Paragraph,,Company
