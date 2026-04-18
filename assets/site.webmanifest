@@ -1,0 +1,21 @@
+{
+  "name": "Code In Canada Recruiting",
+  "short_name": "Code In Canada",
+  "description": "Brazilian engineering talent for North American teams.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F6F3EC",
+  "theme_color": "#1F3A2E",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
