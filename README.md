@@ -9,6 +9,7 @@ Live at: **https://codein.ca**
 ```
 codein/
 ├── index.html          # Entire site — HTML, CSS, and React JSX in one file
+├── deploy.sh           # Rsync to xps15 with CSS cache-busting hash
 └── assets/
     ├── 1.jpg … 6.jpg
     ├── logo-codein-recruiting.png
@@ -81,13 +82,10 @@ window.TWEAK_DEFAULTS = {
 Run from the repo root on your local machine:
 
 ```bash
-rsync -av --delete --exclude='.DS_Store' \
-  index.html \
-  assets \
-  xps15:/home/ds/home-server-setup/data/nginx/html/codein/
+./deploy.sh
 ```
 
-This command is idempotent and safe to re-run. No container restart needed — nginx serves files directly from the bind-mounted directory.
+This computes a content hash of `assets/style.css`, injects it as a cache-busting query string (`?v=<hash>`) into `index.html`, then rsyncs all files to the server. Idempotent and safe to re-run. No container restart needed — nginx serves files directly from the bind-mounted directory.
 
 ### Verify after deploy
 
