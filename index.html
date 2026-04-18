@@ -601,6 +601,7 @@ const ApplyModal = ({ open, onClose, audience: initialAudience = "engineer" }) =
     return saved ? parseInt(saved) : 0;
   });
   const [audience, setAudience] = useState(initialAudience);
+  const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     name: "", email: "", company: "", role: "",
     years: "", stack: [], location: "",
@@ -629,6 +630,31 @@ const ApplyModal = ({ open, onClose, audience: initialAudience = "engineer" }) =
   const next = () => setStep(Math.min(step + 1, steps.length));
   const back = () => setStep(Math.max(step - 1, 0));
   const reset = () => { setStep(0); setForm({ name:"", email:"", company:"", role:"", years:"", stack:[], location:"", motivation:"" }); };
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeWgBSEeCorN8I4lDwoYUz-UauFp0uOPPNzDBH9mjxh21MX6w/formResponse";
+    const body = new URLSearchParams();
+    body.append("entry.366448080", audience === "engineer" ? "I'm a Brazilian engineer" : "I'm hiring engineers");
+    body.append("entry.35330576", form.name);
+    body.append("entry.1536668570", form.email);
+    if (audience === "engineer") {
+      body.append("entry.1804376988", form.years);
+      body.append("entry.1714161214", form.location);
+      form.stack.forEach(s => body.append("entry.1729681152", s));
+      body.append("entry.2052289103", form.motivation);
+    } else {
+      body.append("entry.1882783782", form.company);
+      body.append("entry.1183692460", form.role);
+      form.stack.forEach(s => body.append("entry.1785383490", s));
+      body.append("entry.26120610", form.motivation);
+    }
+    try {
+      await fetch(FORM_URL, { method: "POST", mode: "no-cors", body });
+    } catch (_) {}
+    setSubmitting(false);
+    next();
+  };
 
   return (
     <div className="modal-backdrop" onClick={close}>
@@ -774,7 +800,7 @@ const ApplyModal = ({ open, onClose, audience: initialAudience = "engineer" }) =
             </div>
             <div className="modal-actions">
               <button className="btn btn-ghost" onClick={back}>Back</button>
-              <button className="btn btn-primary" onClick={next}>Submit application <Icon name="arrow-right" size={14}/></button>
+              <button className="btn btn-primary" onClick={handleSubmit} disabled={submitting}>{submitting ? "Sending…" : "Submit application"} <Icon name="arrow-right" size={14}/></button>
             </div>
           </>
         )}
