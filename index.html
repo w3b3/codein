@@ -1,29 +1,33 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Code In Canada — Brazilian engineering talent for North American teams</title>
-<link rel="manifest" href="assets/site.webmanifest" />
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-<meta name="theme-color" content="#1F3A2E" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/style.css" />
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JKMXDKZKY4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-JKMXDKZKY4');
-</script>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKMXDKZKY4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-JKMXDKZKY4');
+  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Code In Canada — Brazilian engineering talent for North American teams</title>
+  <link rel="manifest" href="assets/site.webmanifest" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1F3A2E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+
 <body>
   <div id="root"></div>
 
@@ -36,1055 +40,1062 @@
     }/*EDITMODE-END*/;
   </script>
 
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"
+    integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"
+    integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"
+    integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y"
+    crossorigin="anonymous"></script>
 
   <script type="text/babel">
 
-// === src/primitives.jsx ===
-// Shared primitives + icons
-const { useState, useEffect, useRef, useMemo } = React;
-
-// Minimal line icons, drawn in code — no emoji, no complex SVGs
-const Icon = ({ name, size = 18, stroke = 1.6 }) => {
-  const s = size;
-  const common = {
-    width: s, height: s, viewBox: "0 0 24 24",
-    fill: "none", stroke: "currentColor", strokeWidth: stroke,
-    strokeLinecap: "round", strokeLinejoin: "round"
-  };
-  switch (name) {
-    case "arrow-right":
-      return <svg {...common}><path d="M5 12h14M13 6l6 6-6 6"/></svg>;
-    case "arrow-upright":
-      return <svg {...common}><path d="M7 17L17 7M8 7h9v9"/></svg>;
-    case "plus":
-      return <svg {...common}><path d="M12 5v14M5 12h14"/></svg>;
-    case "close":
-      return <svg {...common}><path d="M6 6l12 12M6 18L18 6"/></svg>;
-    case "check":
-      return <svg {...common}><path d="M5 12l5 5L20 7"/></svg>;
-    case "globe":
-      return <svg {...common}><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>;
-    case "code":
-      return <svg {...common}><path d="M8 6l-5 6 5 6M16 6l5 6-5 6M14 4l-4 16"/></svg>;
-    case "chat":
-      return <svg {...common}><path d="M21 12a8 8 0 1 1-3.2-6.4L21 4l-1.2 3.8A8 8 0 0 1 21 12z"/></svg>;
-    case "briefcase":
-      return <svg {...common}><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>;
-    case "clock":
-      return <svg {...common}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>;
-    case "spark":
-      return <svg {...common}><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></svg>;
-    case "compass":
-      return <svg {...common}><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6z"/></svg>;
-    case "shield":
-      return <svg {...common}><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/></svg>;
-    case "doc":
-      return <svg {...common}><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h6"/></svg>;
-    default: return null;
-  }
-};
-
-window.Icon = Icon;
-
-
-// === src/nav.jsx ===
-const Nav = ({ onApply, activeSection }) => {
-  const links = [
-    { id: "program", label: "Program" },
-    { id: "how", label: "How it works" },
-    { id: "talent", label: "Talent" },
-    { id: "stories", label: "Stories" },
-    { id: "faq", label: "FAQ" },
-  ];
-  return (
-    <header className="nav">
-      <div className="container nav-inner">
-        <div className="nav-left">
-          <a href="#top" className="brand">
-            <img src="assets/logo-codein-recruiting.png" alt="Code in Canada Recruiting" className="brand-logo" />
-          </a>
-          <nav className="nav-links">
-            {links.map(l => (
-              <a key={l.id} href={`#${l.id}`}
-                 className={activeSection === l.id ? "active" : ""}>
-                {l.label}
-              </a>
-            ))}
-          </nav>
-        </div>
-        <div className="nav-right">
-          <a className="lang" href="#pt"><Icon name="globe" size={14} /> &nbsp;EN / PT</a>
-          <button className="btn btn-ghost" onClick={onApply}>Sign in</button>
-          <button className="btn btn-primary" onClick={onApply}>Apply now <Icon name="arrow-right" size={14} /></button>
-        </div>
-      </div>
-    </header>
-  );
-};
-
-window.Nav = Nav;
-
-
-// === src/hero.jsx ===
-const Hero = ({ onApply, variant = "editorial" }) => {
-  return (
-    <section className="hero" id="top">
-      <div className="container">
-        <div className="hero-grid">
-          <div>
-            <div className="pill" style={{ marginBottom: 28 }}>
-              <span className="bullet"></span>
-              Cohort 04 · Applications open · Closes May 14
-            </div>
-            {variant === "editorial" && (
-              <h1>
-                Brazilian<br/>
-                <em>engineering</em> <span className="accent">talent,</span><br/>
-                built for<br/>
-                North America.
-              </h1>
-            )}
-            {variant === "direct" && (
-              <h1>
-                Hire the top <span className="accent">1%</span><br/>
-                of <em>Brazilian</em><br/>
-                engineers.
-              </h1>
-            )}
-            {variant === "bold" && (
-              <h1>
-                Brazil&apos;s best<br/>
-                engineers.<br/>
-                <em>Ready</em> <span className="accent">for</span><br/>
-                North America.
-              </h1>
-            )}
-            <p className="hero-sub">
-              Code in Canada matches rigorously-vetted Brazilian engineers with North American
-              companies — on aligned time zones, English-fluent, and ready to contribute
-              from day one.
-            </p>
-            <div className="hero-cta">
-              <button className="btn btn-primary btn-lg" onClick={onApply}>
-                Apply for Cohort 04 <Icon name="arrow-right" size={15} />
-              </button>
-              <a href="#how" className="btn btn-ghost btn-lg">
-                How it works <Icon name="arrow-upright" size={14} />
-              </a>
-            </div>
-            <div className="hero-meta">
-              <span><strong>Full profile</strong> curation</span>
-              <span><strong>EST / PST</strong> aligned</span>
-              <span><strong>No recruiter fees</strong> for founding members</span>
-            </div>
-          </div>
-
-          <aside className="hero-card">
-            <div className="hero-card-head">
-              <span>Cohort 04 · 2026</span>
-              <span>Live</span>
-            </div>
-            <div className="hero-card-row">
-              <span className="k">Applications</span>
-              <span className="v">Open</span>
-            </div>
-            <div className="hero-card-row">
-              <span className="k">Applicants so far</span>
-              <span className="v big">2,147</span>
-            </div>
-            <div className="hero-card-row">
-              <span className="k">Seats</span>
-              <span className="v">30 <span style={{color:"var(--muted)"}}>/ 30</span></span>
-            </div>
-            <div className="hero-card-row">
-              <span className="k">Closes</span>
-              <span className="v">May 14, 2026</span>
-            </div>
-            <div className="hero-card-row">
-              <span className="k">Starts</span>
-              <span className="v">Jun 02, 2026</span>
-            </div>
-            <div className="flag-stripe" aria-hidden="true">
-              <div></div><div></div><div></div>
-            </div>
-            <div className="hero-foot">
-              <span className="live">Accepting</span>
-              <span>·</span>
-              <span>Remote from Brazil</span>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-const Ticker = () => {
-  const items = [
-    "São Paulo → Toronto",
-    "Rio → New York",
-    "Belo Horizonte → San Francisco",
-    "Curitiba → Vancouver",
-    "Porto Alegre → Austin",
-    "Recife → Montreal",
-    "Florianópolis → Seattle",
-    "Brasília → Boston",
-  ];
-  const doubled = [...items, ...items];
-  return (
-    <div className="ticker" aria-hidden="true">
-      <div className="ticker-track">
-        {doubled.map((x, i) => <span key={i}>{x}</span>)}
-      </div>
-    </div>
-  );
-};
-
-const Stats = () => (
-  <section className="section-sm">
-    <div className="container">
-      <div className="stats">
-        <div>
-          <div className="stat-num">312<small>+</small></div>
-          <div className="stat-label">Engineers placed since 2023</div>
-        </div>
-        <div>
-          <div className="stat-num">94<small>%</small></div>
-          <div className="stat-label">Retention at 12 months</div>
-        </div>
-        <div>
-          <div className="stat-num">1.8<small>%</small></div>
-          <div className="stat-label">Application acceptance rate</div>
-        </div>
-        <div>
-          <div className="stat-num">42</div>
-          <div className="stat-label">Partner companies in US & Canada</div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
-const LogoRow = () => {
-  // Original, plausible partner wordmarks — not real brands
-  const logos = ["Northwind", "Klarity", "Mapleway", "Tern", "Vector/Ops", "Quay"];
-  return (
-    <section className="section-sm" style={{ paddingTop: 0 }}>
-      <div className="container">
-        <div className="eyebrow" style={{ marginBottom: 24, textAlign: "center" }}>
-          <span className="dot"></span>Trusted by teams from seed to series C
-        </div>
-        <div className="logos">
-          {logos.map((l, i) => <div key={i}>{l}</div>)}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-window.Hero = Hero;
-window.Ticker = Ticker;
-window.Stats = Stats;
-window.LogoRow = LogoRow;
-
-
-// === src/how.jsx ===
-const How = ({ onApply }) => {
-  const steps = [
-    {
-      num: "01",
-      tag: "Apply · 20 min",
-      title: "Tell us your story.",
-      desc: "A short written application: your background, a code sample, and the role you want. English + Portuguese accepted.",
-    },
-    {
-      num: "02",
-      tag: "Screen · 1 week",
-      title: "Technical + language screens.",
-      desc: "A live pairing session with a senior engineer, and a structured English interview. We score on reasoning — not trivia.",
-    },
-    {
-      num: "03",
-      tag: "Offer · 2 weeks",
-      title: "Cohort offer + match call.",
-      desc: "The top 1.8% receive a cohort offer. You meet 3 partner companies aligned with your stack and career stage.",
-    },
-    {
-      num: "04",
-      tag: "Interviews · 1–2 weeks",
-      title: "Interview rounds.",
-      desc: "We coordinate and prep you for every round — technical and cultural. You show up; we handle the logistics.",
-    },
-    {
-      num: "05",
-      tag: "Ship · Day 1",
-      title: "Offer. Ship from day one.",
-      desc: "Accept your offer and start working remotely with your partner company. Median offer: USD $85K–$120K.",
-    },
-  ];
-
-  return (
-    <section className="section" id="how">
-      <div className="container">
-        <div className="section-head">
-          <div>
-            <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>How it works</div>
-            <h2>Five steps from<br/>application to offer.</h2>
-          </div>
-          <p className="lede">
-            We run three cohorts a year. Every engineer goes through the same rigorous pipeline —
-            no shortcuts, no exceptions. Companies meet candidates only after they&apos;ve cleared every bar.
-          </p>
-        </div>
-
-        <div className="steps">
-          {steps.map(s => (
-            <article key={s.num} className="step">
-              <div className="step-num">{s.num}<span>STEP</span></div>
-              <div>
-                <h3>{s.title}</h3>
-                <div className="step-tag">{s.tag}</div>
-              </div>
-              <p className="desc">{s.desc}</p>
-            </article>
-          ))}
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "center", marginTop: 48 }}>
-          <button className="btn btn-primary btn-lg" onClick={onApply}>
-            Start your application <Icon name="arrow-right" size={15} />
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-window.How = How;
-
-
-// === src/talent.jsx ===
-const Talent = ({ onApply }) => {
-  const [tab, setTab] = useState("companies");
-  const companyItems = [
-    {
-      icon: "code",
-      title: "Pre-vetted at 1.8% rate.",
-      desc: "Every engineer clears a live pairing round, systems design, and a written async task before you meet them.",
-    },
-    {
-      icon: "globe",
-      title: "Time-zone aligned.",
-      desc: "Brazil sits on EST and one hour off PST. Real overlap, real pairing, real standups — no late-night handoffs.",
-    },
-    {
-      icon: "chat",
-      title: "English-fluent, async-literate.",
-      desc: "Every candidate passes a structured English evaluation and a written-communication task. No translation debt.",
-    },
-    {
-      icon: "briefcase",
-      title: "No placement fee for founding members.",
-      desc: "The first 50 partner companies pay zero for their first three hires. Flat fee after that — no percentage of salary.",
-    },
-    {
-      icon: "spark",
-      title: "Remote-ready candidates.",
-      desc: "Every engineer is set up to work asynchronously, overlap EST/PST hours, and ship independently from day one.",
-    },
-    {
-      icon: "doc",
-      title: "Curated shortlists, not a dump.",
-      desc: "You receive 3–5 candidates per role, ranked. No screening fatigue; no cold inboxes.",
-    },
-  ];
-
-  const engineerItems = [
-    {
-      icon: "compass",
-      title: "Build your North American career.",
-      desc: "Work on real products shipped to millions — with mentorship from senior engineers at partner companies.",
-    },
-    {
-      icon: "globe",
-      title: "Work remotely from Brazil.",
-      desc: "No relocation required. Keep your life, your city, your time zone — and work with teams building products used by millions.",
-    },
-    {
-      icon: "spark",
-      title: "We prep you for every round.",
-      desc: "Interview coaching, async writing feedback, and technical prep tailored to each company on your shortlist.",
-    },
-    {
-      icon: "briefcase",
-      title: "Salary in USD or CAD.",
-      desc: "North American compensation, deposited in your preferred currency. Median offer: USD $85K–$120K.",
-    },
-    {
-      icon: "chat",
-      title: "An alumni network that lasts.",
-      desc: "312 Brazilian engineers across 42 North American companies. Slack, in-person meetups, internal hiring pipeline.",
-    },
-  ];
-
-  const items = tab === "companies" ? companyItems : engineerItems;
-
-  return (
-    <section className="section" id="talent" style={{ background: "var(--bg-sunken)" }}>
-      <div className="container">
-        <div className="section-head">
-          <div>
-            <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>For companies &amp; engineers</div>
-            <h2>Two sides, one<br/>shared <em className="serif" style={{ fontStyle: "italic" }}>standard.</em></h2>
-          </div>
-          <div>
-            <p className="lede" style={{ marginBottom: 24 }}>
-              Whether you&apos;re hiring or being hired, the bar is the same. Toggle to see what you get.
-            </p>
-            <div className="tweak-segments" style={{ maxWidth: 320 }}>
-              <button
-                className={tab === "companies" ? "active" : ""}
-                onClick={() => setTab("companies")}
-              >For companies</button>
-              <button
-                className={tab === "engineers" ? "active" : ""}
-                onClick={() => setTab("engineers")}
-              >For engineers</button>
-            </div>
-          </div>
-        </div>
-
-        <div className="talent">
-          {items.map((it, i) => (
-            <article key={`${tab}-${i}`} className="talent-card">
-              <div className="talent-icon"><Icon name={it.icon} size={20} /></div>
-              <h3>{it.title}</h3>
-              <p dangerouslySetInnerHTML={{ __html: it.desc }} />
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-window.Talent = Talent;
-
-
-// === src/stories.jsx ===
-const Stories = () => {
-  const items = [
-    {
-      quote: "We went from 'we can't find senior Elixir people' to a team of four in one cohort. The bar is absurdly high.",
-      name: "Priya Natarajan",
-      role: "VP ENG · NORTHWIND",
-      initial: "P",
-    },
-    {
-      quote: "I was in São Paulo on a Tuesday and shipping to production by the end of my first month. The match was precise — they knew exactly what I wanted and what the team needed.",
-      name: "Lucas Ferreira",
-      role: "SRE · COHORT 02",
-      initial: "L",
-    },
-    {
-      quote: "Three of our best engineers came through Code in Canada. We stopped using traditional recruiters entirely.",
-      name: "Jordan Bell",
-      role: "HEAD OF TALENT · KLARITY",
-      initial: "J",
-    },
-  ];
-
-  return (
-    <section className="section" id="stories">
-      <div className="container">
-        <div className="section-head">
-          <div>
-            <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>Stories</div>
-            <h2>Teams who hired.<br/>Engineers who shipped.</h2>
-          </div>
-          <p className="lede">
-            A few words from founders, hiring managers, and alumni across the cohorts.
-          </p>
-        </div>
-
-        <div className="stories">
-          {items.map((s, i) => (
-            <article key={i} className="story">
-              <p className="quote">{s.quote}</p>
-              <div className="byline">
-                <div className="avatar">{s.initial}</div>
-                <div>
-                  <div className="name">{s.name}</div>
-                  <div className="role">{s.role}</div>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-window.Stories = Stories;
-
-
-// === src/faq.jsx ===
-const FAQ = () => {
-  const items = [
-    {
-      q: "Who is Code in Canada for?",
-      a: "Two audiences. Brazilian engineers with 3+ years of experience who want to work with North American companies — remotely, from Brazil. And North American companies hiring senior engineers who need time-zone aligned, English-fluent talent. We match them through a rigorous cohort-based process."
-    },
-    {
-      q: "What roles do you place?",
-      a: "Backend, full-stack, mobile, infrastructure/SRE, data engineering, and ML engineering. We occasionally place design engineers and engineering managers. We don't currently place non-engineering roles."
-    },
-    {
-      q: "How much does it cost companies?",
-      a: "Founding-member companies (the first 50) pay zero placement fees for their first three hires. After that, it's a one-time flat fee — no percentage of salary."
-    },
-    {
-      q: "Do engineers pay anything?",
-      a: "No. The process is entirely free for engineers. You apply, we screen, we match you — and you keep 100% of your offer."
-    },
-    {
-      q: "How does remote work with a North American company work legally?",
-      a: "Most placements are structured as contractor or employer-of-record (EOR) arrangements, which require no visa or relocation. We advise on the right structure for your situation and your partner company's jurisdiction."
-    },
-    {
-      q: "Do engineers need to relocate?",
-      a: "No. Engineers work remotely from Brazil. The cohort model means you're matched alongside other vetted engineers, and companies know what to expect — but there's no physical move required."
-    },
-    {
-      q: "What's the application timeline?",
-      a: "From application to offer: roughly 6–10 weeks. We run three cohorts a year — currently June, October, and February. Engineers in the cohort are presented to partner companies over a 2-week match window."
-    },
-  ];
-
-  const [open, setOpen] = useState(0);
-
-  return (
-    <section className="section" id="faq">
-      <div className="container-tight">
-        <div className="section-head">
-          <div>
-            <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>Questions</div>
-            <h2>Things we&apos;re<br/>often asked.</h2>
-          </div>
-          <p className="lede">
-            If there&apos;s something we haven&apos;t covered, reach out at <a style={{ textDecoration: "underline" }} href="#">hello@codein.ca</a> — we answer everything within 24 hours.
-          </p>
-        </div>
-
-        <div>
-          {items.map((it, i) => (
-            <div key={i} className={`faq-item ${open === i ? "open" : ""}`}>
-              <button
-                className="faq-q"
-                onClick={() => setOpen(open === i ? -1 : i)}
-                aria-expanded={open === i}
-              >
-                <h3>{it.q}</h3>
-                <span className="faq-toggle"><Icon name="plus" size={16} /></span>
-              </button>
-              <div className="faq-a"><p>{it.a}</p></div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
-
-window.FAQ = FAQ;
-
-
-// === src/apply.jsx ===
-const ApplyModal = ({ open, onClose, audience: initialAudience = "engineer" }) => {
-  const [step, setStep] = useState(() => {
-    const saved = localStorage.getItem("apply-step");
-    return saved ? parseInt(saved) : 0;
-  });
-  const [audience, setAudience] = useState(initialAudience);
-  const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({
-    name: "", email: "", company: "", role: "",
-    years: "", stack: [], location: "",
-    motivation: "",
-  });
-
-  useEffect(() => {
-    localStorage.setItem("apply-step", String(step));
-  }, [step]);
-
-  if (!open) return null;
-
-  const stacks = ["Backend", "Frontend", "Full-stack", "Mobile", "Infra/SRE", "Data", "ML"];
-  const toggleStack = (s) => {
-    setForm(f => ({
-      ...f,
-      stack: f.stack.includes(s) ? f.stack.filter(x => x !== s) : [...f.stack, s]
-    }));
-  };
-
-  const steps = audience === "engineer"
-    ? ["Audience", "About you", "Your stack", "Review"]
-    : ["Audience", "About you", "Hiring needs", "Review"];
-
-  const close = () => { onClose(); };
-  const next = () => setStep(Math.min(step + 1, steps.length));
-  const back = () => setStep(Math.max(step - 1, 0));
-  const reset = () => { setStep(0); setForm({ name:"", email:"", company:"", role:"", years:"", stack:[], location:"", motivation:"" }); };
-
-  const handleSubmit = async () => {
-    setSubmitting(true);
-    const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeWgBSEeCorN8I4lDwoYUz-UauFp0uOPPNzDBH9mjxh21MX6w/formResponse";
-    const body = new URLSearchParams();
-    body.append("entry.366448080", audience === "engineer" ? "I'm a Brazilian engineer" : "I'm hiring engineers");
-    body.append("entry.35330576", form.name);
-    body.append("entry.1536668570", form.email);
-    if (audience === "engineer") {
-      body.append("entry.1804376988", form.years);
-      body.append("entry.1714161214", form.location);
-      form.stack.forEach(s => body.append("entry.1729681152", s));
-      body.append("entry.2052289103", form.motivation);
-    } else {
-      body.append("entry.1882783782", form.company);
-      body.append("entry.1183692460", form.role);
-      form.stack.forEach(s => body.append("entry.1785383490", s));
-      body.append("entry.26120610", form.motivation);
-    }
-    try {
-      await fetch(FORM_URL, { method: "POST", mode: "no-cors", body });
-    } catch (_) {}
-    setSubmitting(false);
-    next();
-  };
-
-  return (
-    <div className="modal-backdrop" onClick={close}>
-      <div className="modal" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={close} aria-label="Close"><Icon name="close" size={16}/></button>
-
-        {step < steps.length && (
-          <div className="modal-steps">
-            {steps.map((_, i) => (
-              <div key={i} className={i === step ? "active" : i < step ? "done" : ""} />
-            ))}
-          </div>
-        )}
-
-        {step === 0 && (
-          <>
-            <h3>Who are you?</h3>
-            <p className="sub">Pick the path that fits. You can switch later.</p>
-            <div style={{ display: "grid", gap: 10 }}>
-              <button
-                className={`chip ${audience === "engineer" ? "selected" : ""}`}
-                style={{ padding: "18px 20px", textAlign: "left", borderRadius: 12, fontSize: 15 }}
-                onClick={() => setAudience("engineer")}
-              >
-                <div style={{ fontWeight: 500, marginBottom: 4 }}>I&apos;m a Brazilian engineer</div>
-                <div style={{ fontSize: 13, opacity: 0.7 }}>Applying to work remotely with North American companies.</div>
-              </button>
-              <button
-                className={`chip ${audience === "company" ? "selected" : ""}`}
-                style={{ padding: "18px 20px", textAlign: "left", borderRadius: 12, fontSize: 15 }}
-                onClick={() => setAudience("company")}
-              >
-                <div style={{ fontWeight: 500, marginBottom: 4 }}>I&apos;m hiring engineers</div>
-                <div style={{ fontSize: 13, opacity: 0.7 }}>Looking to onboard cohort engineers onto my team.</div>
-              </button>
-            </div>
-            <div className="modal-actions">
-              <button className="btn btn-ghost" onClick={close}>Cancel</button>
-              <button className="btn btn-primary" onClick={next}>Continue <Icon name="arrow-right" size={14}/></button>
-            </div>
-          </>
-        )}
-
-        {step === 1 && (
-          <>
-            <h3>A bit about you.</h3>
-            <p className="sub">We&apos;ll use this to route your application.</p>
-            <div className="field-row">
-              <div className="field">
-                <label>Full name</label>
-                <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Maria Silva" />
-              </div>
-              <div className="field">
-                <label>Email</label>
-                <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="maria@example.com" />
-              </div>
-            </div>
-            {audience === "engineer" ? (
-              <div className="field-row">
-                <div className="field">
-                  <label>Years of experience</label>
-                  <select value={form.years} onChange={(e) => setForm({ ...form, years: e.target.value })}>
-                    <option value="">Select</option>
-                    <option>3–5 years</option>
-                    <option>5–8 years</option>
-                    <option>8–12 years</option>
-                    <option>12+ years</option>
-                  </select>
-                </div>
-                <div className="field">
-                  <label>Current city</label>
-                  <input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} placeholder="São Paulo, BR" />
-                </div>
-              </div>
-            ) : (
-              <div className="field-row">
-                <div className="field">
-                  <label>Company</label>
-                  <input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} placeholder="Northwind Inc." />
-                </div>
-                <div className="field">
-                  <label>Your role</label>
-                  <input value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} placeholder="Head of Engineering" />
-                </div>
-              </div>
-            )}
-            <div className="modal-actions">
-              <button className="btn btn-ghost" onClick={back}>Back</button>
-              <button className="btn btn-primary" onClick={next}>Continue <Icon name="arrow-right" size={14}/></button>
-            </div>
-          </>
-        )}
-
-        {step === 2 && (
-          <>
-            <h3>{audience === "engineer" ? "What do you build?" : "Who are you hiring?"}</h3>
-            <p className="sub">Pick everything that applies.</p>
-            <div className="chips" style={{ marginBottom: 18 }}>
-              {stacks.map(s => (
-                <button key={s}
-                  className={`chip ${form.stack.includes(s) ? "selected" : ""}`}
-                  onClick={() => toggleStack(s)}>{s}</button>
-              ))}
-            </div>
-            <div className="field">
-              <label>{audience === "engineer" ? "Why Code in Canada?" : "What roles are hardest to fill?"}</label>
-              <textarea
-                value={form.motivation}
-                onChange={(e) => setForm({ ...form, motivation: e.target.value })}
-                placeholder={audience === "engineer" ? "Tell us in a few sentences…" : "Tell us about the gaps on your team…"}
-              />
-            </div>
-            <div className="modal-actions">
-              <button className="btn btn-ghost" onClick={back}>Back</button>
-              <button className="btn btn-primary" onClick={next}>Continue <Icon name="arrow-right" size={14}/></button>
-            </div>
-          </>
-        )}
-
-        {step === 3 && (
-          <>
-            <h3>Review &amp; submit.</h3>
-            <p className="sub">One quick check before you send.</p>
-            <div style={{ background: "var(--bg-sunken)", borderRadius: 10, padding: 16, fontSize: 14, marginBottom: 18 }}>
-              <div style={{ display: "grid", gap: 8 }}>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ color: "var(--muted)" }}>Path</span>
-                  <span style={{ fontWeight: 500 }}>{audience === "engineer" ? "Engineer application" : "Hiring partnership"}</span>
-                </div>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ color: "var(--muted)" }}>Name</span>
-                  <span style={{ fontWeight: 500 }}>{form.name || "—"}</span>
-                </div>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ color: "var(--muted)" }}>Email</span>
-                  <span style={{ fontWeight: 500 }}>{form.email || "—"}</span>
-                </div>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ color: "var(--muted)" }}>Stack</span>
-                  <span style={{ fontWeight: 500 }}>{form.stack.join(", ") || "—"}</span>
-                </div>
-              </div>
-            </div>
-            <div className="modal-actions">
-              <button className="btn btn-ghost" onClick={back}>Back</button>
-              <button className="btn btn-primary" onClick={handleSubmit} disabled={submitting}>{submitting ? "Sending…" : "Submit application"} <Icon name="arrow-right" size={14}/></button>
-            </div>
-          </>
-        )}
-
-        {step >= steps.length && (
-          <>
-            <div className="success">
-              <div className="checkmark"><Icon name="check" size={28} /></div>
-              <h3 style={{ marginBottom: 8 }}>You&apos;re in the queue.</h3>
-              <p style={{ color: "var(--muted)", fontSize: 15, maxWidth: 360, margin: "0 auto" }}>
-                We review applications weekly. You&apos;ll hear back within 5 business days — look for an email from <strong style={{color: "var(--ink)"}}>hello@codein.ca</strong>.
-              </p>
-              <div style={{ display: "flex", gap: 10, justifyContent: "center", marginTop: 28 }}>
-                <button className="btn btn-ghost" onClick={() => { reset(); }}>Submit another</button>
-                <button className="btn btn-primary" onClick={() => { reset(); close(); }}>Done</button>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
-};
-
-window.ApplyModal = ApplyModal;
-
-
-// === src/tweaks.jsx ===
-const Tweaks = ({ tweaks, setTweaks, onClose }) => {
-  const accents = [
-    { id: "coral", color: "#E4572E" },
-    { id: "maple", color: "#C33A2B" },
-    { id: "sun",   color: "#E8B84A" },
-    { id: "sky",   color: "#2E6AA8" },
-  ];
-  const heroes = [
-    { id: "editorial", label: "Editorial" },
-    { id: "direct",    label: "Direct" },
-    { id: "bold",      label: "Bold" },
-  ];
-  const densities = [
-    { id: "compact",     label: "Tight" },
-    { id: "comfortable", label: "Default" },
-    { id: "spacious",    label: "Airy" },
-  ];
-
-  const update = (k, v) => {
-    const next = { ...tweaks, [k]: v };
-    setTweaks(next);
-    window.parent.postMessage({ type: "__edit_mode_set_keys", edits: { [k]: v } }, "*");
-  };
-
-  return (
-    <div className="tweaks">
-      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom: 14 }}>
-        <h4 style={{ margin: 0 }}>Tweaks</h4>
-        <button onClick={onClose} style={{ color: "var(--muted)", padding: 4 }}><Icon name="close" size={14}/></button>
-      </div>
-
-      <div className="tweak-group">
-        <label>Accent color</label>
-        <div className="tweak-swatches">
-          {accents.map(a => (
-            <button key={a.id}
-              className={`tweak-swatch ${tweaks.accent === a.id ? "active" : ""}`}
-              style={{ background: a.color }}
-              onClick={() => update("accent", a.id)}
-              aria-label={a.id}
-            />
-          ))}
-        </div>
-      </div>
-
-      <div className="tweak-group">
-        <label>Hero headline</label>
-        <div className="tweak-segments">
-          {heroes.map(h => (
-            <button key={h.id}
-              className={tweaks.heroVariant === h.id ? "active" : ""}
-              onClick={() => update("heroVariant", h.id)}>{h.label}</button>
-          ))}
-        </div>
-      </div>
-
-      <div className="tweak-group">
-        <label>Density</label>
-        <div className="tweak-segments">
-          {densities.map(d => (
-            <button key={d.id}
-              className={tweaks.density === d.id ? "active" : ""}
-              onClick={() => update("density", d.id)}>{d.label}</button>
-          ))}
-        </div>
-      </div>
-
-      <div className="tweak-group tweak-toggle">
-        <label style={{ margin: 0 }}>Show stats row</label>
-        <button
-          className={`switch ${tweaks.showStats ? "on" : ""}`}
-          onClick={() => update("showStats", !tweaks.showStats)}
-          aria-pressed={tweaks.showStats}
-        />
-      </div>
-    </div>
-  );
-};
-
-window.Tweaks = Tweaks;
-
-
-
-
-// === src/app.jsx ===
-const Footer = () => (
-  <footer className="footer">
-    <div className="container">
-      <div className="footer-grid">
-        <div className="footer-brand">
-          <img src="assets/logo-codein-recruiting.png" alt="Code in Canada Recruiting" style={{ height: 40, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.9, marginBottom: 16 }} />
-          <p>
-            A recruiting company connecting rigorously-vetted Brazilian engineers with
-            North American teams. Remote-first. Three cohorts a year.
-          </p>
-          <div style={{ marginTop: 24, display: "flex", gap: 12 }}>
-            <div className="pill" style={{ background: "rgba(246,243,236,0.06)", color: "rgba(246,243,236,0.7)", borderColor: "rgba(246,243,236,0.12)" }}>
-              <span className="bullet" style={{ background: "var(--accent)" }}></span>
-              Now accepting Cohort 04
-            </div>
-          </div>
-        </div>
-        <div className="footer-col">
-          <h4>Program</h4>
-          <ul>
-            <li><a href="#how">How it works</a></li>
-            <li><a href="#talent">For companies</a></li>
-            <li><a href="#talent">For engineers</a></li>
-          </ul>
-        </div>
-        <div className="footer-col">
-          <h4>Company</h4>
-          <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Stories</a></li>
-            <li><a href="#">Press</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </div>
-        <div className="footer-col">
-          <h4>Resources</h4>
-          <ul>
-            <li><a href="#">Engineer handbook</a></li>
-            <li><a href="#">Employer brief</a></li>
-            <li><a href="#">Remote work guide</a></li>
-            <li><a href="#">Alumni</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="footer-bottom">
-        <div>© 2026 Code in Canada Inc.</div>
-        <div>Toronto · São Paulo</div>
-        <div>Privacy · Terms · hello@codein.ca</div>
-      </div>
-    </div>
-  </footer>
-);
-
-const CTABand = ({ onApply }) => (
-  <section className="cta-band">
-    <div className="container" style={{ position: "relative", zIndex: 1 }}>
-      <div style={{ maxWidth: 880 }}>
-        <div className="eyebrow" style={{ color: "rgba(246,243,236,0.6)", marginBottom: 24 }}>
-          <span className="dot"></span>Cohort 04 · Closes May 14
-        </div>
-        <h2>
-          The <em>next</em> great engineer<br/>
-          on your team is already<br/>
-          writing code tonight.
-        </h2>
-        <p>
-          Just in São Paulo, or Rio, or Belo Horizonte. Apply to Cohort 04 — or reach out to
-          partner with us as a hiring company.
-        </p>
-        <div className="cta-band-actions">
-          <button className="btn btn-primary btn-lg" onClick={onApply}>
-            Apply to Cohort 04 <Icon name="arrow-right" size={15}/>
-          </button>
-          <a href="#how" className="btn btn-ghost btn-lg">
-            Hire from Code in Canada <Icon name="arrow-upright" size={14}/>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div className="cta-watermark">ca</div>
-  </section>
-);
-
-const App = () => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [tweaks, setTweaks] = useState(window.TWEAK_DEFAULTS);
-  const [tweaksOpen, setTweaksOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("program");
-
-  // Apply tweaks to root
-  useEffect(() => {
-    document.body.setAttribute("data-accent", tweaks.accent);
-    document.body.setAttribute("data-density", tweaks.density);
-  }, [tweaks]);
-
-  // Edit-mode protocol
-  useEffect(() => {
-    const handler = (e) => {
-      if (!e.data || typeof e.data !== "object") return;
-      if (e.data.type === "__activate_edit_mode") setTweaksOpen(true);
-      if (e.data.type === "__deactivate_edit_mode") setTweaksOpen(false);
-      if (e.data.type === "__edit_mode_keys") {
-        if (e.data.keys) setTweaks(t => ({ ...t, ...e.data.keys }));
+    // === src/primitives.jsx ===
+    // Shared primitives + icons
+    const { useState, useEffect, useRef, useMemo } = React;
+
+    // Minimal line icons, drawn in code — no emoji, no complex SVGs
+    const Icon = ({ name, size = 18, stroke = 1.6 }) => {
+      const s = size;
+      const common = {
+        width: s, height: s, viewBox: "0 0 24 24",
+        fill: "none", stroke: "currentColor", strokeWidth: stroke,
+        strokeLinecap: "round", strokeLinejoin: "round"
+      };
+      switch (name) {
+        case "arrow-right":
+          return <svg {...common}><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
+        case "arrow-upright":
+          return <svg {...common}><path d="M7 17L17 7M8 7h9v9" /></svg>;
+        case "plus":
+          return <svg {...common}><path d="M12 5v14M5 12h14" /></svg>;
+        case "close":
+          return <svg {...common}><path d="M6 6l12 12M6 18L18 6" /></svg>;
+        case "check":
+          return <svg {...common}><path d="M5 12l5 5L20 7" /></svg>;
+        case "globe":
+          return <svg {...common}><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" /></svg>;
+        case "code":
+          return <svg {...common}><path d="M8 6l-5 6 5 6M16 6l5 6-5 6M14 4l-4 16" /></svg>;
+        case "chat":
+          return <svg {...common}><path d="M21 12a8 8 0 1 1-3.2-6.4L21 4l-1.2 3.8A8 8 0 0 1 21 12z" /></svg>;
+        case "briefcase":
+          return <svg {...common}><rect x="3" y="7" width="18" height="13" rx="2" /><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18" /></svg>;
+        case "clock":
+          return <svg {...common}><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>;
+        case "spark":
+          return <svg {...common}><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6" /></svg>;
+        case "compass":
+          return <svg {...common}><circle cx="12" cy="12" r="9" /><path d="M15 9l-2 6-6 2 2-6z" /></svg>;
+        case "shield":
+          return <svg {...common}><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z" /></svg>;
+        case "doc":
+          return <svg {...common}><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h6" /></svg>;
+        default: return null;
       }
     };
-    window.addEventListener("message", handler);
-    window.parent.postMessage({ type: "__edit_mode_available" }, "*");
-    return () => window.removeEventListener("message", handler);
-  }, []);
 
-  // Section-spy for nav highlighting
-  useEffect(() => {
-    const ids = ["program", "how", "talent", "stories", "faq"];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) setActiveSection(e.target.id);
-        });
-      },
-      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
-    );
-    ids.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
+    window.Icon = Icon;
 
-  const onApply = () => setModalOpen(true);
 
-  return (
-    <>
-      <Nav onApply={onApply} activeSection={activeSection} />
-      <main id="program">
-        <Hero onApply={onApply} variant={tweaks.heroVariant} />
-        <Ticker />
-        {tweaks.showStats && <Stats />}
-        <LogoRow />
-        <div className="editorial-strip">
-          <img src="assets/1.jpg" alt="Engineers on the move" />
+    // === src/nav.jsx ===
+    const Nav = ({ onApply, activeSection }) => {
+      const links = [
+        { id: "program", label: "Program" },
+        { id: "how", label: "How it works" },
+        { id: "talent", label: "Talent" },
+        { id: "stories", label: "Stories" },
+        { id: "faq", label: "FAQ" },
+      ];
+      return (
+        <header className="nav">
+          <div className="container nav-inner">
+            <div className="nav-left">
+              <a href="#top" className="brand">
+                <img src="assets/logo-codein-recruiting.png" alt="Code in Canada Recruiting" className="brand-logo" />
+              </a>
+              <nav className="nav-links">
+                {links.map(l => (
+                  <a key={l.id} href={`#${l.id}`}
+                    className={activeSection === l.id ? "active" : ""}>
+                    {l.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
+            <div className="nav-right">
+              <a className="lang" href="#pt"><Icon name="globe" size={14} /> &nbsp;EN / PT</a>
+              <button className="btn btn-ghost" onClick={onApply}>Sign in</button>
+              <button className="btn btn-primary" onClick={onApply}>Apply now <Icon name="arrow-right" size={14} /></button>
+            </div>
+          </div>
+        </header>
+      );
+    };
+
+    window.Nav = Nav;
+
+
+    // === src/hero.jsx ===
+    const Hero = ({ onApply, variant = "editorial" }) => {
+      return (
+        <section className="hero" id="top">
+          <div className="container">
+            <div className="hero-grid">
+              <div>
+                <div className="pill" style={{ marginBottom: 28 }}>
+                  <span className="bullet"></span>
+                  Cohort 04 · Applications open · Closes May 14
+                </div>
+                {variant === "editorial" && (
+                  <h1>
+                    Brazilian<br />
+                    <em>engineering</em> <span className="accent">talent,</span><br />
+                    built for<br />
+                    North America.
+                  </h1>
+                )}
+                {variant === "direct" && (
+                  <h1>
+                    Hire the top <span className="accent">1%</span><br />
+                    of <em>Brazilian</em><br />
+                    engineers.
+                  </h1>
+                )}
+                {variant === "bold" && (
+                  <h1>
+                    Brazil&apos;s best<br />
+                    engineers.<br />
+                    <em>Ready</em> <span className="accent">for</span><br />
+                    North America.
+                  </h1>
+                )}
+                <p className="hero-sub">
+                  Code in Canada matches rigorously-vetted Brazilian engineers with North American
+                  companies — on aligned time zones, English-fluent, and ready to contribute
+                  from day one.
+                </p>
+                <div className="hero-cta">
+                  <button className="btn btn-primary btn-lg" onClick={onApply}>
+                    Apply for Cohort 04 <Icon name="arrow-right" size={15} />
+                  </button>
+                  <a href="#how" className="btn btn-ghost btn-lg">
+                    How it works <Icon name="arrow-upright" size={14} />
+                  </a>
+                </div>
+                <div className="hero-meta">
+                  <span><strong>Full profile</strong> curation</span>
+                  <span><strong>EST / PST</strong> aligned</span>
+                  <span><strong>No recruiter fees</strong> for founding members</span>
+                </div>
+              </div>
+
+              <aside className="hero-card">
+                <div className="hero-card-head">
+                  <span>Cohort 04 · 2026</span>
+                  <span>Live</span>
+                </div>
+                <div className="hero-card-row">
+                  <span className="k">Applications</span>
+                  <span className="v">Open</span>
+                </div>
+                <div className="hero-card-row">
+                  <span className="k">Applicants so far</span>
+                  <span className="v big">2,147</span>
+                </div>
+                <div className="hero-card-row">
+                  <span className="k">Seats</span>
+                  <span className="v">30 <span style={{ color: "var(--muted)" }}>/ 30</span></span>
+                </div>
+                <div className="hero-card-row">
+                  <span className="k">Closes</span>
+                  <span className="v">May 14, 2026</span>
+                </div>
+                <div className="hero-card-row">
+                  <span className="k">Starts</span>
+                  <span className="v">Jun 02, 2026</span>
+                </div>
+                <div className="flag-stripe" aria-hidden="true">
+                  <div></div><div></div><div></div>
+                </div>
+                <div className="hero-foot">
+                  <span className="live">Accepting</span>
+                  <span>·</span>
+                  <span>Remote from Brazil</span>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    const Ticker = () => {
+      const items = [
+        "São Paulo → Toronto",
+        "Rio → New York",
+        "Belo Horizonte → San Francisco",
+        "Curitiba → Vancouver",
+        "Porto Alegre → Austin",
+        "Recife → Montreal",
+        "Florianópolis → Seattle",
+        "Brasília → Boston",
+      ];
+      const doubled = [...items, ...items];
+      return (
+        <div className="ticker" aria-hidden="true">
+          <div className="ticker-track">
+            {doubled.map((x, i) => <span key={i}>{x}</span>)}
+          </div>
         </div>
-        <How onApply={onApply} />
-        <Talent onApply={onApply} />
-        <Stories />
-        <FAQ />
-        <CTABand onApply={onApply} />
-      </main>
-      <Footer />
+      );
+    };
 
-      <ApplyModal open={modalOpen} onClose={() => setModalOpen(false)} />
+    const Stats = () => (
+      <section className="section-sm">
+        <div className="container">
+          <div className="stats">
+            <div>
+              <div className="stat-num">312<small>+</small></div>
+              <div className="stat-label">Engineers placed since 2023</div>
+            </div>
+            <div>
+              <div className="stat-num">94<small>%</small></div>
+              <div className="stat-label">Retention at 12 months</div>
+            </div>
+            <div>
+              <div className="stat-num">1.8<small>%</small></div>
+              <div className="stat-label">Application acceptance rate</div>
+            </div>
+            <div>
+              <div className="stat-num">42</div>
+              <div className="stat-label">Partner companies in US & Canada</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
 
-      {tweaksOpen && (
-        <Tweaks tweaks={tweaks} setTweaks={setTweaks} onClose={() => setTweaksOpen(false)} />
-      )}
-    </>
-  );
-};
+    const LogoRow = () => {
+      // Original, plausible partner wordmarks — not real brands
+      const logos = ["Northwind", "Klarity", "Mapleway", "Tern", "Vector/Ops", "Quay"];
+      return (
+        <section className="section-sm" style={{ paddingTop: 0 }}>
+          <div className="container">
+            <div className="eyebrow" style={{ marginBottom: 24, textAlign: "center" }}>
+              <span className="dot"></span>Trusted by teams from seed to series C
+            </div>
+            <div className="logos">
+              {logos.map((l, i) => <div key={i}>{l}</div>)}
+            </div>
+          </div>
+        </section>
+      );
+    };
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    window.Hero = Hero;
+    window.Ticker = Ticker;
+    window.Stats = Stats;
+    window.LogoRow = LogoRow;
+
+
+    // === src/how.jsx ===
+    const How = ({ onApply }) => {
+      const steps = [
+        {
+          num: "01",
+          tag: "Apply · 20 min",
+          title: "Tell us your story.",
+          desc: "A short written application: your background, a code sample, and the role you want. English + Portuguese accepted.",
+        },
+        {
+          num: "02",
+          tag: "Screen · 1 week",
+          title: "Technical + language screens.",
+          desc: "A live pairing session with a senior engineer, and a structured English interview. We score on reasoning — not trivia.",
+        },
+        {
+          num: "03",
+          tag: "Offer · 2 weeks",
+          title: "Cohort offer + match call.",
+          desc: "The top 1.8% receive a cohort offer. You meet 3 partner companies aligned with your stack and career stage.",
+        },
+        {
+          num: "04",
+          tag: "Interviews · 1–2 weeks",
+          title: "Interview rounds.",
+          desc: "We coordinate and prep you for every round — technical and cultural. You show up; we handle the logistics.",
+        },
+        {
+          num: "05",
+          tag: "Ship · Day 1",
+          title: "Offer. Ship from day one.",
+          desc: "Accept your offer and start working remotely with your partner company. Median offer: USD $85K–$120K.",
+        },
+      ];
+
+      return (
+        <section className="section" id="how">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>How it works</div>
+                <h2>Five steps from<br />application to offer.</h2>
+              </div>
+              <p className="lede">
+                We run three cohorts a year. Every engineer goes through the same rigorous pipeline —
+                no shortcuts, no exceptions. Companies meet candidates only after they&apos;ve cleared every bar.
+              </p>
+            </div>
+
+            <div className="steps">
+              {steps.map(s => (
+                <article key={s.num} className="step">
+                  <div className="step-num">{s.num}<span>STEP</span></div>
+                  <div>
+                    <h3>{s.title}</h3>
+                    <div className="step-tag">{s.tag}</div>
+                  </div>
+                  <p className="desc">{s.desc}</p>
+                </article>
+              ))}
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "center", marginTop: 48 }}>
+              <button className="btn btn-primary btn-lg" onClick={onApply}>
+                Start your application <Icon name="arrow-right" size={15} />
+              </button>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    window.How = How;
+
+
+    // === src/talent.jsx ===
+    const Talent = ({ onApply }) => {
+      const [tab, setTab] = useState("companies");
+      const companyItems = [
+        {
+          icon: "code",
+          title: "Pre-vetted at 1.8% rate.",
+          desc: "Every engineer clears a live pairing round, systems design, and a written async task before you meet them.",
+        },
+        {
+          icon: "globe",
+          title: "Time-zone aligned.",
+          desc: "Brazil sits on EST and one hour off PST. Real overlap, real pairing, real standups — no late-night handoffs.",
+        },
+        {
+          icon: "chat",
+          title: "English-fluent, async-literate.",
+          desc: "Every candidate passes a structured English evaluation and a written-communication task. No translation debt.",
+        },
+        {
+          icon: "briefcase",
+          title: "No placement fee for founding members.",
+          desc: "The first 50 partner companies pay zero for their first three hires. Flat fee after that — no percentage of salary.",
+        },
+        {
+          icon: "spark",
+          title: "Remote-ready candidates.",
+          desc: "Every engineer is set up to work asynchronously, overlap EST/PST hours, and ship independently from day one.",
+        },
+        {
+          icon: "doc",
+          title: "Curated shortlists, not a dump.",
+          desc: "You receive 3–5 candidates per role, ranked. No screening fatigue; no cold inboxes.",
+        },
+      ];
+
+      const engineerItems = [
+        {
+          icon: "compass",
+          title: "Build your North American career.",
+          desc: "Work on real products shipped to millions — with mentorship from senior engineers at partner companies.",
+        },
+        {
+          icon: "globe",
+          title: "Work remotely from Brazil.",
+          desc: "No relocation required. Keep your life, your city, your time zone — and work with teams building products used by millions.",
+        },
+        {
+          icon: "spark",
+          title: "We prep you for every round.",
+          desc: "Interview coaching, async writing feedback, and technical prep tailored to each company on your shortlist.",
+        },
+        {
+          icon: "briefcase",
+          title: "Salary in USD or CAD.",
+          desc: "North American compensation, deposited in your preferred currency. Median offer: USD $85K–$120K.",
+        },
+        {
+          icon: "chat",
+          title: "An alumni network that lasts.",
+          desc: "312 Brazilian engineers across 42 North American companies. Slack, in-person meetups, internal hiring pipeline.",
+        },
+      ];
+
+      const items = tab === "companies" ? companyItems : engineerItems;
+
+      return (
+        <section className="section" id="talent" style={{ background: "var(--bg-sunken)" }}>
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>For companies &amp; engineers</div>
+                <h2>Two sides, one<br />shared <em className="serif" style={{ fontStyle: "italic" }}>standard.</em></h2>
+              </div>
+              <div>
+                <p className="lede" style={{ marginBottom: 24 }}>
+                  Whether you&apos;re hiring or being hired, the bar is the same. Toggle to see what you get.
+                </p>
+                <div className="tweak-segments" style={{ maxWidth: 320 }}>
+                  <button
+                    className={tab === "companies" ? "active" : ""}
+                    onClick={() => setTab("companies")}
+                  >For companies</button>
+                  <button
+                    className={tab === "engineers" ? "active" : ""}
+                    onClick={() => setTab("engineers")}
+                  >For engineers</button>
+                </div>
+              </div>
+            </div>
+
+            <div className="talent">
+              {items.map((it, i) => (
+                <article key={`${tab}-${i}`} className="talent-card">
+                  <div className="talent-icon"><Icon name={it.icon} size={20} /></div>
+                  <h3>{it.title}</h3>
+                  <p dangerouslySetInnerHTML={{ __html: it.desc }} />
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    window.Talent = Talent;
+
+
+    // === src/stories.jsx ===
+    const Stories = () => {
+      const items = [
+        {
+          quote: "We went from 'we can't find senior Elixir people' to a team of four in one cohort. The bar is absurdly high.",
+          name: "Priya Natarajan",
+          role: "VP ENG · NORTHWIND",
+          initial: "P",
+        },
+        {
+          quote: "I was in São Paulo on a Tuesday and shipping to production by the end of my first month. The match was precise — they knew exactly what I wanted and what the team needed.",
+          name: "Lucas Ferreira",
+          role: "SRE · COHORT 02",
+          initial: "L",
+        },
+        {
+          quote: "Three of our best engineers came through Code in Canada. We stopped using traditional recruiters entirely.",
+          name: "Jordan Bell",
+          role: "HEAD OF TALENT · KLARITY",
+          initial: "J",
+        },
+      ];
+
+      return (
+        <section className="section" id="stories">
+          <div className="container">
+            <div className="section-head">
+              <div>
+                <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>Stories</div>
+                <h2>Teams who hired.<br />Engineers who shipped.</h2>
+              </div>
+              <p className="lede">
+                A few words from founders, hiring managers, and alumni across the cohorts.
+              </p>
+            </div>
+
+            <div className="stories">
+              {items.map((s, i) => (
+                <article key={i} className="story">
+                  <p className="quote">{s.quote}</p>
+                  <div className="byline">
+                    <div className="avatar">{s.initial}</div>
+                    <div>
+                      <div className="name">{s.name}</div>
+                      <div className="role">{s.role}</div>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    window.Stories = Stories;
+
+
+    // === src/faq.jsx ===
+    const FAQ = () => {
+      const items = [
+        {
+          q: "Who is Code in Canada for?",
+          a: "Two audiences. Brazilian engineers with 3+ years of experience who want to work with North American companies — remotely, from Brazil. And North American companies hiring senior engineers who need time-zone aligned, English-fluent talent. We match them through a rigorous cohort-based process."
+        },
+        {
+          q: "What roles do you place?",
+          a: "Backend, full-stack, mobile, infrastructure/SRE, data engineering, and ML engineering. We occasionally place design engineers and engineering managers. We don't currently place non-engineering roles."
+        },
+        {
+          q: "How much does it cost companies?",
+          a: "Founding-member companies (the first 50) pay zero placement fees for their first three hires. After that, it's a one-time flat fee — no percentage of salary."
+        },
+        {
+          q: "Do engineers pay anything?",
+          a: "No. The process is entirely free for engineers. You apply, we screen, we match you — and you keep 100% of your offer."
+        },
+        {
+          q: "How does remote work with a North American company work legally?",
+          a: "Most placements are structured as contractor or employer-of-record (EOR) arrangements, which require no visa or relocation. We advise on the right structure for your situation and your partner company's jurisdiction."
+        },
+        {
+          q: "Do engineers need to relocate?",
+          a: "No. Engineers work remotely from Brazil. The cohort model means you're matched alongside other vetted engineers, and companies know what to expect — but there's no physical move required."
+        },
+        {
+          q: "What's the application timeline?",
+          a: "From application to offer: roughly 6–10 weeks. We run three cohorts a year — currently June, October, and February. Engineers in the cohort are presented to partner companies over a 2-week match window."
+        },
+      ];
+
+      const [open, setOpen] = useState(0);
+
+      return (
+        <section className="section" id="faq">
+          <div className="container-tight">
+            <div className="section-head">
+              <div>
+                <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>Questions</div>
+                <h2>Things we&apos;re<br />often asked.</h2>
+              </div>
+              <p className="lede">
+                If there&apos;s something we haven&apos;t covered, reach out at <a style={{ textDecoration: "underline" }} href="#">hello@codein.ca</a> — we answer everything within 24 hours.
+              </p>
+            </div>
+
+            <div>
+              {items.map((it, i) => (
+                <div key={i} className={`faq-item ${open === i ? "open" : ""}`}>
+                  <button
+                    className="faq-q"
+                    onClick={() => setOpen(open === i ? -1 : i)}
+                    aria-expanded={open === i}
+                  >
+                    <h3>{it.q}</h3>
+                    <span className="faq-toggle"><Icon name="plus" size={16} /></span>
+                  </button>
+                  <div className="faq-a"><p>{it.a}</p></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    window.FAQ = FAQ;
+
+
+    // === src/apply.jsx ===
+    const ApplyModal = ({ open, onClose, audience: initialAudience = "engineer" }) => {
+      const [step, setStep] = useState(() => {
+        const saved = localStorage.getItem("apply-step");
+        return saved ? parseInt(saved) : 0;
+      });
+      const [audience, setAudience] = useState(initialAudience);
+      const [submitting, setSubmitting] = useState(false);
+      const [form, setForm] = useState({
+        name: "", email: "", company: "", role: "",
+        years: "", stack: [], location: "",
+        motivation: "",
+      });
+
+      useEffect(() => {
+        localStorage.setItem("apply-step", String(step));
+      }, [step]);
+
+      if (!open) return null;
+
+      const stacks = ["Backend", "Frontend", "Full-stack", "Mobile", "Infra/SRE", "Data", "ML"];
+      const toggleStack = (s) => {
+        setForm(f => ({
+          ...f,
+          stack: f.stack.includes(s) ? f.stack.filter(x => x !== s) : [...f.stack, s]
+        }));
+      };
+
+      const steps = audience === "engineer"
+        ? ["Audience", "About you", "Your stack", "Review"]
+        : ["Audience", "About you", "Hiring needs", "Review"];
+
+      const close = () => { onClose(); };
+      const next = () => setStep(Math.min(step + 1, steps.length));
+      const back = () => setStep(Math.max(step - 1, 0));
+      const reset = () => { setStep(0); setForm({ name: "", email: "", company: "", role: "", years: "", stack: [], location: "", motivation: "" }); };
+
+      const handleSubmit = async () => {
+        setSubmitting(true);
+        const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeWgBSEeCorN8I4lDwoYUz-UauFp0uOPPNzDBH9mjxh21MX6w/formResponse";
+        const body = new URLSearchParams();
+        body.append("entry.366448080", audience === "engineer" ? "I'm a Brazilian engineer" : "I'm hiring engineers");
+        body.append("entry.35330576", form.name);
+        body.append("entry.1536668570", form.email);
+        if (audience === "engineer") {
+          body.append("entry.1804376988", form.years);
+          body.append("entry.1714161214", form.location);
+          form.stack.forEach(s => body.append("entry.1729681152", s));
+          body.append("entry.2052289103", form.motivation);
+        } else {
+          body.append("entry.1882783782", form.company);
+          body.append("entry.1183692460", form.role);
+          form.stack.forEach(s => body.append("entry.1785383490", s));
+          body.append("entry.26120610", form.motivation);
+        }
+        try {
+          await fetch(FORM_URL, { method: "POST", mode: "no-cors", body });
+        } catch (_) { }
+        setSubmitting(false);
+        next();
+      };
+
+      return (
+        <div className="modal-backdrop" onClick={close}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={close} aria-label="Close"><Icon name="close" size={16} /></button>
+
+            {step < steps.length && (
+              <div className="modal-steps">
+                {steps.map((_, i) => (
+                  <div key={i} className={i === step ? "active" : i < step ? "done" : ""} />
+                ))}
+              </div>
+            )}
+
+            {step === 0 && (
+              <>
+                <h3>Who are you?</h3>
+                <p className="sub">Pick the path that fits. You can switch later.</p>
+                <div style={{ display: "grid", gap: 10 }}>
+                  <button
+                    className={`chip ${audience === "engineer" ? "selected" : ""}`}
+                    style={{ padding: "18px 20px", textAlign: "left", borderRadius: 12, fontSize: 15 }}
+                    onClick={() => setAudience("engineer")}
+                  >
+                    <div style={{ fontWeight: 500, marginBottom: 4 }}>I&apos;m a Brazilian engineer</div>
+                    <div style={{ fontSize: 13, opacity: 0.7 }}>Applying to work remotely with North American companies.</div>
+                  </button>
+                  <button
+                    className={`chip ${audience === "company" ? "selected" : ""}`}
+                    style={{ padding: "18px 20px", textAlign: "left", borderRadius: 12, fontSize: 15 }}
+                    onClick={() => setAudience("company")}
+                  >
+                    <div style={{ fontWeight: 500, marginBottom: 4 }}>I&apos;m hiring engineers</div>
+                    <div style={{ fontSize: 13, opacity: 0.7 }}>Looking to onboard cohort engineers onto my team.</div>
+                  </button>
+                </div>
+                <div className="modal-actions">
+                  <button className="btn btn-ghost" onClick={close}>Cancel</button>
+                  <button className="btn btn-primary" onClick={next}>Continue <Icon name="arrow-right" size={14} /></button>
+                </div>
+              </>
+            )}
+
+            {step === 1 && (
+              <>
+                <h3>A bit about you.</h3>
+                <p className="sub">We&apos;ll use this to route your application.</p>
+                <div className="field-row">
+                  <div className="field">
+                    <label>Full name</label>
+                    <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Maria Silva" />
+                  </div>
+                  <div className="field">
+                    <label>Email</label>
+                    <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="maria@example.com" />
+                  </div>
+                </div>
+                {audience === "engineer" ? (
+                  <div className="field-row">
+                    <div className="field">
+                      <label>Years of experience</label>
+                      <select value={form.years} onChange={(e) => setForm({ ...form, years: e.target.value })}>
+                        <option value="">Select</option>
+                        <option>3–5 years</option>
+                        <option>5–8 years</option>
+                        <option>8–12 years</option>
+                        <option>12+ years</option>
+                      </select>
+                    </div>
+                    <div className="field">
+                      <label>Current city</label>
+                      <input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} placeholder="São Paulo, BR" />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="field-row">
+                    <div className="field">
+                      <label>Company</label>
+                      <input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} placeholder="Northwind Inc." />
+                    </div>
+                    <div className="field">
+                      <label>Your role</label>
+                      <input value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} placeholder="Head of Engineering" />
+                    </div>
+                  </div>
+                )}
+                <div className="modal-actions">
+                  <button className="btn btn-ghost" onClick={back}>Back</button>
+                  <button className="btn btn-primary" onClick={next}>Continue <Icon name="arrow-right" size={14} /></button>
+                </div>
+              </>
+            )}
+
+            {step === 2 && (
+              <>
+                <h3>{audience === "engineer" ? "What do you build?" : "Who are you hiring?"}</h3>
+                <p className="sub">Pick everything that applies.</p>
+                <div className="chips" style={{ marginBottom: 18 }}>
+                  {stacks.map(s => (
+                    <button key={s}
+                      className={`chip ${form.stack.includes(s) ? "selected" : ""}`}
+                      onClick={() => toggleStack(s)}>{s}</button>
+                  ))}
+                </div>
+                <div className="field">
+                  <label>{audience === "engineer" ? "Why Code in Canada?" : "What roles are hardest to fill?"}</label>
+                  <textarea
+                    value={form.motivation}
+                    onChange={(e) => setForm({ ...form, motivation: e.target.value })}
+                    placeholder={audience === "engineer" ? "Tell us in a few sentences…" : "Tell us about the gaps on your team…"}
+                  />
+                </div>
+                <div className="modal-actions">
+                  <button className="btn btn-ghost" onClick={back}>Back</button>
+                  <button className="btn btn-primary" onClick={next}>Continue <Icon name="arrow-right" size={14} /></button>
+                </div>
+              </>
+            )}
+
+            {step === 3 && (
+              <>
+                <h3>Review &amp; submit.</h3>
+                <p className="sub">One quick check before you send.</p>
+                <div style={{ background: "var(--bg-sunken)", borderRadius: 10, padding: 16, fontSize: 14, marginBottom: 18 }}>
+                  <div style={{ display: "grid", gap: 8 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <span style={{ color: "var(--muted)" }}>Path</span>
+                      <span style={{ fontWeight: 500 }}>{audience === "engineer" ? "Engineer application" : "Hiring partnership"}</span>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <span style={{ color: "var(--muted)" }}>Name</span>
+                      <span style={{ fontWeight: 500 }}>{form.name || "—"}</span>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <span style={{ color: "var(--muted)" }}>Email</span>
+                      <span style={{ fontWeight: 500 }}>{form.email || "—"}</span>
+                    </div>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                      <span style={{ color: "var(--muted)" }}>Stack</span>
+                      <span style={{ fontWeight: 500 }}>{form.stack.join(", ") || "—"}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="modal-actions">
+                  <button className="btn btn-ghost" onClick={back}>Back</button>
+                  <button className="btn btn-primary" onClick={handleSubmit} disabled={submitting}>{submitting ? "Sending…" : "Submit application"} <Icon name="arrow-right" size={14} /></button>
+                </div>
+              </>
+            )}
+
+            {step >= steps.length && (
+              <>
+                <div className="success">
+                  <div className="checkmark"><Icon name="check" size={28} /></div>
+                  <h3 style={{ marginBottom: 8 }}>You&apos;re in the queue.</h3>
+                  <p style={{ color: "var(--muted)", fontSize: 15, maxWidth: 360, margin: "0 auto" }}>
+                    We review applications weekly. You&apos;ll hear back within 5 business days — look for an email from <strong style={{ color: "var(--ink)" }}>hello@codein.ca</strong>.
+                  </p>
+                  <div style={{ display: "flex", gap: 10, justifyContent: "center", marginTop: 28 }}>
+                    <button className="btn btn-ghost" onClick={() => { reset(); }}>Submit another</button>
+                    <button className="btn btn-primary" onClick={() => { reset(); close(); }}>Done</button>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    window.ApplyModal = ApplyModal;
+
+
+    // === src/tweaks.jsx ===
+    const Tweaks = ({ tweaks, setTweaks, onClose }) => {
+      const accents = [
+        { id: "coral", color: "#E4572E" },
+        { id: "maple", color: "#C33A2B" },
+        { id: "sun", color: "#E8B84A" },
+        { id: "sky", color: "#2E6AA8" },
+      ];
+      const heroes = [
+        { id: "editorial", label: "Editorial" },
+        { id: "direct", label: "Direct" },
+        { id: "bold", label: "Bold" },
+      ];
+      const densities = [
+        { id: "compact", label: "Tight" },
+        { id: "comfortable", label: "Default" },
+        { id: "spacious", label: "Airy" },
+      ];
+
+      const update = (k, v) => {
+        const next = { ...tweaks, [k]: v };
+        setTweaks(next);
+        window.parent.postMessage({ type: "__edit_mode_set_keys", edits: { [k]: v } }, "*");
+      };
+
+      return (
+        <div className="tweaks">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+            <h4 style={{ margin: 0 }}>Tweaks</h4>
+            <button onClick={onClose} style={{ color: "var(--muted)", padding: 4 }}><Icon name="close" size={14} /></button>
+          </div>
+
+          <div className="tweak-group">
+            <label>Accent color</label>
+            <div className="tweak-swatches">
+              {accents.map(a => (
+                <button key={a.id}
+                  className={`tweak-swatch ${tweaks.accent === a.id ? "active" : ""}`}
+                  style={{ background: a.color }}
+                  onClick={() => update("accent", a.id)}
+                  aria-label={a.id}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="tweak-group">
+            <label>Hero headline</label>
+            <div className="tweak-segments">
+              {heroes.map(h => (
+                <button key={h.id}
+                  className={tweaks.heroVariant === h.id ? "active" : ""}
+                  onClick={() => update("heroVariant", h.id)}>{h.label}</button>
+              ))}
+            </div>
+          </div>
+
+          <div className="tweak-group">
+            <label>Density</label>
+            <div className="tweak-segments">
+              {densities.map(d => (
+                <button key={d.id}
+                  className={tweaks.density === d.id ? "active" : ""}
+                  onClick={() => update("density", d.id)}>{d.label}</button>
+              ))}
+            </div>
+          </div>
+
+          <div className="tweak-group tweak-toggle">
+            <label style={{ margin: 0 }}>Show stats row</label>
+            <button
+              className={`switch ${tweaks.showStats ? "on" : ""}`}
+              onClick={() => update("showStats", !tweaks.showStats)}
+              aria-pressed={tweaks.showStats}
+            />
+          </div>
+        </div>
+      );
+    };
+
+    window.Tweaks = Tweaks;
+
+
+
+
+    // === src/app.jsx ===
+    const Footer = () => (
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-grid">
+            <div className="footer-brand">
+              <img src="assets/logo-codein-recruiting.png" alt="Code in Canada Recruiting" style={{ height: 40, width: "auto", filter: "brightness(0) invert(1)", opacity: 0.9, marginBottom: 16 }} />
+              <p>
+                A recruiting company connecting rigorously-vetted Brazilian engineers with
+                North American teams. Remote-first. Three cohorts a year.
+              </p>
+              <div style={{ marginTop: 24, display: "flex", gap: 12 }}>
+                <div className="pill" style={{ background: "rgba(246,243,236,0.06)", color: "rgba(246,243,236,0.7)", borderColor: "rgba(246,243,236,0.12)" }}>
+                  <span className="bullet" style={{ background: "var(--accent)" }}></span>
+                  Now accepting Cohort 04
+                </div>
+              </div>
+            </div>
+            <div className="footer-col">
+              <h4>Program</h4>
+              <ul>
+                <li><a href="#how">How it works</a></li>
+                <li><a href="#talent">For companies</a></li>
+                <li><a href="#talent">For engineers</a></li>
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h4>Company</h4>
+              <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Stories</a></li>
+                <li><a href="#">Press</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+            <div className="footer-col">
+              <h4>Resources</h4>
+              <ul>
+                <li><a href="#">Engineer handbook</a></li>
+                <li><a href="#">Employer brief</a></li>
+                <li><a href="#">Remote work guide</a></li>
+                <li><a href="#">Alumni</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="footer-bottom">
+            <div>© 2026 Code in Canada Inc.</div>
+            <div>Toronto · São Paulo</div>
+            <div>Privacy · Terms · hello@codein.ca</div>
+          </div>
+        </div>
+      </footer>
+    );
+
+    const CTABand = ({ onApply }) => (
+      <section className="cta-band">
+        <div className="container" style={{ position: "relative", zIndex: 1 }}>
+          <div style={{ maxWidth: 880 }}>
+            <div className="eyebrow" style={{ color: "rgba(246,243,236,0.6)", marginBottom: 24 }}>
+              <span className="dot"></span>Cohort 04 · Closes May 14
+            </div>
+            <h2>
+              The <em>next</em> great engineer<br />
+              on your team is already<br />
+              writing code tonight.
+            </h2>
+            <p>
+              Just in São Paulo, or Rio, or Belo Horizonte. Apply to Cohort 04 — or reach out to
+              partner with us as a hiring company.
+            </p>
+            <div className="cta-band-actions">
+              <button className="btn btn-primary btn-lg" onClick={onApply}>
+                Apply to Cohort 04 <Icon name="arrow-right" size={15} />
+              </button>
+              <a href="#how" className="btn btn-ghost btn-lg">
+                Hire from Code in Canada <Icon name="arrow-upright" size={14} />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="cta-watermark">ca</div>
+      </section>
+    );
+
+    const App = () => {
+      const [modalOpen, setModalOpen] = useState(false);
+      const [tweaks, setTweaks] = useState(window.TWEAK_DEFAULTS);
+      const [tweaksOpen, setTweaksOpen] = useState(false);
+      const [activeSection, setActiveSection] = useState("program");
+
+      // Apply tweaks to root
+      useEffect(() => {
+        document.body.setAttribute("data-accent", tweaks.accent);
+        document.body.setAttribute("data-density", tweaks.density);
+      }, [tweaks]);
+
+      // Edit-mode protocol
+      useEffect(() => {
+        const handler = (e) => {
+          if (!e.data || typeof e.data !== "object") return;
+          if (e.data.type === "__activate_edit_mode") setTweaksOpen(true);
+          if (e.data.type === "__deactivate_edit_mode") setTweaksOpen(false);
+          if (e.data.type === "__edit_mode_keys") {
+            if (e.data.keys) setTweaks(t => ({ ...t, ...e.data.keys }));
+          }
+        };
+        window.addEventListener("message", handler);
+        window.parent.postMessage({ type: "__edit_mode_available" }, "*");
+        return () => window.removeEventListener("message", handler);
+      }, []);
+
+      // Section-spy for nav highlighting
+      useEffect(() => {
+        const ids = ["program", "how", "talent", "stories", "faq"];
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(e => {
+              if (e.isIntersecting) setActiveSection(e.target.id);
+            });
+          },
+          { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+        );
+        ids.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) observer.observe(el);
+        });
+        return () => observer.disconnect();
+      }, []);
+
+      const onApply = () => setModalOpen(true);
+
+      return (
+        <>
+          <Nav onApply={onApply} activeSection={activeSection} />
+          <main id="program">
+            <Hero onApply={onApply} variant={tweaks.heroVariant} />
+            <Ticker />
+            {tweaks.showStats && <Stats />}
+            <LogoRow />
+            <div className="editorial-strip">
+              <img src="assets/1.jpg" alt="Engineers on the move" />
+            </div>
+            <How onApply={onApply} />
+            <Talent onApply={onApply} />
+            <Stories />
+            <FAQ />
+            <CTABand onApply={onApply} />
+          </main>
+          <Footer />
+
+          <ApplyModal open={modalOpen} onClose={() => setModalOpen(false)} />
+
+          {tweaksOpen && (
+            <Tweaks tweaks={tweaks} setTweaks={setTweaks} onClose={() => setTweaksOpen(false)} />
+          )}
+        </>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
 
   </script>
 </body>
+
 </html>
