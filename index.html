@@ -1,0 +1,1822 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Code In Canada — Brazilian engineering talent for North American teams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root {
+  /* Base palette — warm, editorial */
+  --bg: #F6F3EC;           /* warm off-white */
+  --bg-card: #FFFFFF;
+  --bg-sunken: #EFEBE2;
+  --ink: #1A1A17;          /* deep charcoal, not pure black */
+  --ink-2: #3D3B35;
+  --muted: #6E6A5F;
+  --rule: #D9D3C2;
+  --rule-soft: #E8E3D6;
+
+  /* Primary — deep Canadian evergreen */
+  --primary: #1F3A2E;
+  --primary-ink: #0E2118;
+  --primary-hover: #16291F;
+
+  /* Accents — coral (Brazil warmth), sky, maple */
+  --coral: #E4572E;
+  --coral-soft: #F6C9B5;
+  --sky: #2E6AA8;
+  --maple: #C33A2B;
+  --sun: #E8B84A;
+
+  --accent: var(--coral);
+  --accent-soft: var(--coral-soft);
+
+  /* Type */
+  --serif: "Instrument Serif", "Times New Roman", serif;
+  --sans: "Geist", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Rhythm */
+  --radius: 6px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 0 rgba(26,26,23,0.04), 0 1px 2px rgba(26,26,23,0.04);
+  --shadow-md: 0 2px 0 rgba(26,26,23,0.04), 0 10px 30px -12px rgba(26,26,23,0.16);
+}
+
+[data-accent="sky"]   { --accent: var(--sky);   --accent-soft: #CFE0F1; }
+[data-accent="maple"] { --accent: var(--maple); --accent-soft: #F1C8C3; }
+[data-accent="sun"]   { --accent: var(--sun);   --accent-soft: #F6E3B0; }
+[data-accent="coral"] { --accent: var(--coral); --accent-soft: var(--coral-soft); }
+
+[data-density="compact"] { --row: 12px; --sec: 80px; }
+[data-density="comfortable"] { --row: 16px; --sec: 112px; }
+[data-density="spacious"] { --row: 20px; --sec: 144px; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv11";
+  letter-spacing: -0.005em;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+img, svg { display: block; max-width: 100%; }
+
+h1, h2, h3, h4 { margin: 0; font-weight: 400; letter-spacing: -0.02em; }
+p { margin: 0; }
+
+/* Utility */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.container-tight { max-width: 960px; margin: 0 auto; padding: 0 40px; }
+
+.serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.015em; }
+.mono  { font-family: var(--mono); font-weight: 500; letter-spacing: 0.02em; }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.eyebrow .dot {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); margin-right: 8px; vertical-align: 1px;
+}
+
+.rule { height: 1px; background: var(--rule); width: 100%; }
+
+/* Buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  font-size: 14px; font-weight: 500;
+  transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--primary); color: #F6F3EC;
+}
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-ghost {
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--rule);
+}
+.btn-ghost:hover { border-color: var(--ink); }
+.btn-accent {
+  background: var(--accent); color: #fff;
+}
+.btn-accent:hover { filter: brightness(0.95); }
+.btn-lg { padding: 14px 22px; font-size: 15px; }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 12px 5px 8px;
+  border-radius: 999px;
+  background: var(--bg-sunken);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  border: 1px solid var(--rule-soft);
+}
+.pill .bullet {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+
+/* Nav */
+.nav {
+  position: sticky; top: 0; z-index: 40;
+  background: rgba(246,243,236,0.82);
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid var(--rule-soft);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-left { display: flex; align-items: center; gap: 44px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.02em; font-size: 17px; }
+.brand-mark {
+  width: 26px; height: 26px; border-radius: 7px;
+  background: var(--primary); color: #F6F3EC;
+  display: grid; place-items: center; font-family: var(--serif); font-size: 18px;
+  position: relative; overflow: hidden;
+}
+.brand-mark::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 8px; background: var(--accent);
+}
+.nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--ink-2); }
+.nav-links a { position: relative; padding: 6px 0; }
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -22px; height: 2px; background: var(--ink);
+}
+.nav-right { display: flex; align-items: center; gap: 14px; font-size: 14px; }
+.lang { color: var(--muted); }
+.lang:hover { color: var(--ink); }
+
+/* Sections */
+.section { padding: var(--sec) 0; }
+.section-sm { padding: calc(var(--sec) * 0.55) 0; }
+
+.section-head {
+  display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: end;
+  margin-bottom: 56px;
+}
+.section-head h2 { font-family: var(--serif); font-size: clamp(40px, 4.6vw, 64px); line-height: 1.02; }
+.section-head .lede { color: var(--muted); font-size: 17px; max-width: 52ch; }
+
+@media (max-width: 880px) {
+  .section-head { grid-template-columns: 1fr; gap: 24px; }
+  .container, .container-tight { padding: 0 24px; }
+}
+
+/* Hero */
+.hero {
+  padding: 48px 0 calc(var(--sec) * 0.9);
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1.15fr .85fr; gap: 80px; align-items: start;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(56px, 7.4vw, 112px);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+.hero h1 em { font-style: italic; color: var(--primary); }
+.hero h1 .accent { color: var(--accent); font-style: italic; }
+.hero-sub {
+  margin-top: 28px; max-width: 46ch; font-size: 18px; color: var(--ink-2); line-height: 1.5;
+}
+.hero-cta { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-meta {
+  margin-top: 44px; display: flex; gap: 28px; flex-wrap: wrap; color: var(--muted);
+  font-size: 13px;
+}
+.hero-meta strong { color: var(--ink); font-weight: 500; }
+
+/* Hero right: flag-card */
+.hero-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+.hero-card-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-bottom: 14px; border-bottom: 1px dashed var(--rule);
+  font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);
+}
+.hero-card-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; border-bottom: 1px solid var(--rule-soft);
+  font-size: 14px;
+}
+.hero-card-row:last-child { border-bottom: 0; }
+.hero-card-row .k { color: var(--muted); font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+.hero-card-row .v { font-weight: 500; }
+.hero-card-row .v.big { font-family: var(--serif); font-size: 28px; letter-spacing: -0.01em; }
+
+.hero-foot {
+  margin-top: 18px; display: flex; gap: 8px; align-items: center;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+}
+.hero-foot .live {
+  display: inline-flex; align-items: center; gap: 6px; color: var(--primary);
+}
+.hero-foot .live::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--primary);
+  box-shadow: 0 0 0 3px rgba(31,58,46,0.14); animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: 0.5 } }
+
+.flag-stripe {
+  margin-top: 18px; height: 40px; border-radius: 8px; overflow: hidden;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+}
+.flag-stripe div:nth-child(1) { background: var(--primary); }
+.flag-stripe div:nth-child(2) { background: var(--sun); }
+.flag-stripe div:nth-child(3) { background: var(--accent); }
+
+/* Ticker */
+.ticker {
+  border-top: 1px solid var(--rule-soft); border-bottom: 1px solid var(--rule-soft);
+  padding: 18px 0; overflow: hidden;
+  background: var(--bg);
+}
+.ticker-track {
+  display: flex; gap: 56px; white-space: nowrap; animation: slide 40s linear infinite;
+  font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);
+}
+.ticker-track span { display: inline-flex; align-items: center; gap: 10px; }
+.ticker-track span::before { content: "✦"; color: var(--accent); }
+@keyframes slide {
+  from { transform: translateX(0) }
+  to   { transform: translateX(-50%) }
+}
+
+/* Stats */
+.stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+.stats > div {
+  padding: 36px 28px; border-right: 1px solid var(--rule-soft);
+}
+.stats > div:last-child { border-right: 0; }
+.stat-num {
+  font-family: var(--serif); font-size: 56px; line-height: 1; letter-spacing: -0.02em;
+}
+.stat-num small { font-size: 24px; color: var(--muted); margin-left: 2px; }
+.stat-label { margin-top: 10px; font-size: 13px; color: var(--muted); }
+
+@media (max-width: 880px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stats > div:nth-child(2) { border-right: 0; }
+  .stats > div:nth-child(-n+2) { border-bottom: 1px solid var(--rule-soft); }
+}
+
+/* How-to steps */
+.steps { display: grid; gap: 0; }
+.step {
+  display: grid; grid-template-columns: 120px 1fr 1fr; gap: 48px;
+  padding: 40px 0;
+  border-top: 1px solid var(--rule);
+  align-items: start;
+  transition: background .2s ease;
+}
+.step:last-child { border-bottom: 1px solid var(--rule); }
+.step:hover { background: rgba(255,255,255,0.5); }
+.step-num {
+  font-family: var(--serif); font-size: 64px; line-height: 0.9;
+  color: var(--ink);
+  display: flex; align-items: baseline; gap: 6px;
+}
+.step-num span { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.1em; }
+.step h3 { font-family: var(--serif); font-size: 32px; line-height: 1.1; }
+.step .desc { color: var(--muted); font-size: 15px; max-width: 48ch; }
+.step-tag {
+  display: inline-block; margin-top: 12px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent);
+}
+
+@media (max-width: 880px) {
+  .step { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+  .step-num { font-size: 44px; }
+}
+
+/* Talent grid (what's required) */
+.talent {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.talent-card {
+  background: var(--bg-card);
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  position: relative;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.talent-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--rule); }
+.talent-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  background: var(--bg-sunken);
+  display: grid; place-items: center;
+  margin-bottom: 20px;
+}
+.talent-card h3 { font-family: var(--serif); font-size: 22px; line-height: 1.2; margin-bottom: 8px; }
+.talent-card p { color: var(--muted); font-size: 14.5px; }
+
+@media (max-width: 880px) { .talent { grid-template-columns: 1fr; } }
+
+/* Roadmap */
+.roadmap {
+  background: var(--bg-sunken);
+  padding: 96px 0;
+  border-top: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--rule-soft);
+}
+.roadmap-track {
+  position: relative;
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.roadmap-line {
+  position: absolute; top: 14px; left: 4%; right: 4%;
+  height: 2px; background: repeating-linear-gradient(90deg, var(--rule) 0 6px, transparent 6px 12px);
+}
+.roadmap-step {
+  cursor: pointer;
+  padding-top: 40px;
+  position: relative;
+}
+.roadmap-step::before {
+  content: ""; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--bg-sunken); border: 2px solid var(--rule);
+  transition: all .2s ease;
+}
+.roadmap-step.done::before { background: var(--primary); border-color: var(--primary); }
+.roadmap-step.active::before {
+  background: var(--accent); border-color: var(--accent);
+  box-shadow: 0 0 0 6px rgba(228,87,46,0.15);
+}
+.roadmap-step .week {
+  font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);
+}
+.roadmap-step.active .week { color: var(--accent); }
+.roadmap-step h4 { font-family: var(--serif); font-size: 20px; margin-top: 6px; }
+.roadmap-step p { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+.roadmap-detail {
+  margin-top: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: start;
+  min-height: 200px;
+}
+.roadmap-detail h3 { font-family: var(--serif); font-size: 32px; line-height: 1.1; margin-bottom: 10px; }
+.roadmap-detail .meta { color: var(--accent); font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 14px; }
+.roadmap-detail .bullets { display: grid; gap: 10px; color: var(--ink-2); font-size: 15px; }
+.roadmap-detail .bullets li { list-style: none; padding-left: 22px; position: relative; }
+.roadmap-detail .bullets li::before {
+  content: ""; position: absolute; left: 0; top: 9px;
+  width: 10px; height: 1px; background: var(--accent);
+}
+
+@media (max-width: 880px) {
+  .roadmap-track { grid-template-columns: 1fr; gap: 8px; }
+  .roadmap-line { display: none; }
+  .roadmap-step { padding-top: 0; padding-left: 28px; padding-bottom: 16px; border-left: 2px dashed var(--rule); }
+  .roadmap-step::before { top: 2px; left: -9px; transform: none; }
+  .roadmap-detail { grid-template-columns: 1fr; }
+}
+
+/* Stories */
+.stories {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.story {
+  background: var(--bg-card);
+  border: 1px solid var(--rule-soft);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  display: flex; flex-direction: column; gap: 20px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.story:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.story .quote { font-family: var(--serif); font-size: 22px; line-height: 1.3; letter-spacing: -0.01em; }
+.story .quote::before { content: "“"; font-family: var(--serif); font-size: 64px; line-height: 0; vertical-align: -22px; color: var(--accent); margin-right: 4px; }
+.story .byline { display: flex; align-items: center; gap: 12px; margin-top: auto; padding-top: 20px; border-top: 1px solid var(--rule-soft); }
+.story .avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: #F6F3EC; display: grid; place-items: center;
+  font-family: var(--serif); font-size: 18px;
+}
+.story .byline .name { font-weight: 500; font-size: 14px; }
+.story .byline .role { color: var(--muted); font-size: 12.5px; font-family: var(--mono); letter-spacing: 0.02em; }
+
+@media (max-width: 880px) { .stories { grid-template-columns: 1fr; } }
+
+/* Logo row */
+.logos {
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: 0;
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+.logos > div {
+  padding: 28px; text-align: center;
+  border-right: 1px solid var(--rule-soft);
+  font-family: var(--serif); font-size: 20px; color: var(--muted);
+  letter-spacing: -0.01em;
+  transition: color .2s ease, background .2s ease;
+}
+.logos > div:last-child { border-right: 0; }
+.logos > div:hover { color: var(--ink); background: var(--bg-card); }
+
+@media (max-width: 880px) {
+  .logos { grid-template-columns: repeat(2, 1fr); }
+  .logos > div:nth-child(2n) { border-right: 0; }
+  .logos > div:not(:nth-last-child(-n+2)) { border-bottom: 1px solid var(--rule-soft); }
+}
+
+/* FAQ */
+.faq-item {
+  border-top: 1px solid var(--rule);
+  padding: 28px 0;
+}
+.faq-item:last-child { border-bottom: 1px solid var(--rule); }
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center; gap: 24px;
+  width: 100%; text-align: left; padding: 0;
+}
+.faq-q h3 { font-family: var(--serif); font-size: 26px; line-height: 1.15; }
+.faq-toggle {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--rule);
+  display: grid; place-items: center;
+  transition: transform .3s ease, background .2s ease, border-color .2s ease;
+  flex-shrink: 0;
+}
+.faq-q:hover .faq-toggle { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.faq-item.open .faq-toggle { transform: rotate(45deg); background: var(--accent); color: #fff; border-color: var(--accent); }
+.faq-a {
+  overflow: hidden; max-height: 0; transition: max-height .4s ease, margin .3s ease;
+  color: var(--ink-2); font-size: 15.5px; line-height: 1.55; max-width: 68ch;
+}
+.faq-item.open .faq-a { max-height: 600px; margin-top: 16px; }
+
+/* CTA band */
+.cta-band {
+  background: var(--primary); color: #F6F3EC;
+  padding: 96px 0;
+  position: relative; overflow: hidden;
+}
+.cta-band h2 { font-family: var(--serif); font-size: clamp(48px, 6vw, 88px); line-height: 1.02; }
+.cta-band h2 em { color: var(--accent); font-style: italic; }
+.cta-band p { color: rgba(246,243,236,0.7); margin-top: 20px; max-width: 52ch; font-size: 18px; }
+.cta-band .btn-primary { background: var(--accent); color: #fff; }
+.cta-band .btn-primary:hover { background: var(--accent); filter: brightness(1.08); }
+.cta-band .btn-ghost { border-color: rgba(246,243,236,0.3); color: #F6F3EC; }
+.cta-band .btn-ghost:hover { border-color: #F6F3EC; }
+.cta-band-actions { margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; }
+.cta-watermark {
+  position: absolute; right: -40px; bottom: -80px; font-family: var(--serif); font-size: 420px; line-height: 0.8;
+  color: rgba(246,243,236,0.04); font-style: italic; pointer-events: none; user-select: none;
+}
+
+/* Footer */
+.footer {
+  background: var(--ink); color: rgba(246,243,236,0.7);
+  padding: 72px 0 36px;
+}
+.footer a { color: rgba(246,243,236,0.7); }
+.footer a:hover { color: #F6F3EC; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+.footer-col h4 { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(246,243,236,0.45); margin-bottom: 18px; font-weight: 500; }
+.footer-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; font-size: 14px; }
+.footer-brand h3 {
+  font-family: var(--serif); font-size: 40px; line-height: 1; color: #F6F3EC;
+  margin-bottom: 16px; letter-spacing: -0.02em;
+}
+.footer-brand p { max-width: 38ch; font-size: 14px; line-height: 1.55; }
+.footer-bottom {
+  margin-top: 72px; padding-top: 24px;
+  border-top: 1px solid rgba(246,243,236,0.1);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+  font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+  color: rgba(246,243,236,0.45);
+}
+@media (max-width: 880px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+/* Modal (apply flow) */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(14, 33, 24, 0.5);
+  backdrop-filter: blur(6px);
+  z-index: 100; display: grid; place-items: center; padding: 24px;
+  animation: fadeIn .2s ease;
+}
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+.modal {
+  background: var(--bg-card);
+  border-radius: 16px;
+  width: 100%; max-width: 560px;
+  padding: 32px;
+  position: relative;
+  box-shadow: 0 30px 80px -20px rgba(14,33,24,0.5);
+  animation: pop .25s cubic-bezier(.2,.9,.3,1.2);
+}
+@keyframes pop {
+  from { opacity: 0; transform: translateY(14px) scale(.98) }
+  to   { opacity: 1; transform: translateY(0) scale(1) }
+}
+.modal-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center; color: var(--muted);
+  transition: background .2s ease, color .2s ease;
+}
+.modal-close:hover { background: var(--bg-sunken); color: var(--ink); }
+.modal h3 { font-family: var(--serif); font-size: 32px; line-height: 1.1; margin-bottom: 8px; }
+.modal .sub { color: var(--muted); font-size: 14.5px; margin-bottom: 24px; }
+.modal-steps { display: flex; gap: 8px; margin-bottom: 24px; }
+.modal-steps div {
+  flex: 1; height: 3px; background: var(--rule); border-radius: 2px;
+  transition: background .3s ease;
+}
+.modal-steps div.active { background: var(--primary); }
+.modal-steps div.done { background: var(--accent); }
+.field { display: grid; gap: 6px; margin-bottom: 16px; }
+.field label { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.field input, .field select, .field textarea {
+  font-family: var(--sans); font-size: 15px; color: var(--ink);
+  padding: 12px 14px; border-radius: 8px; border: 1px solid var(--rule);
+  background: var(--bg); outline: none; transition: border-color .15s ease, box-shadow .15s ease;
+  width: 100%;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--primary); box-shadow: 0 0 0 3px rgba(31,58,46,0.12);
+}
+.field textarea { min-height: 96px; resize: vertical; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 8px 14px; border-radius: 999px; border: 1px solid var(--rule);
+  font-size: 13px; transition: all .15s ease; background: var(--bg-card);
+}
+.chip:hover { border-color: var(--ink); }
+.chip.selected { background: var(--primary); color: #F6F3EC; border-color: var(--primary); }
+.modal-actions { display: flex; justify-content: space-between; margin-top: 24px; gap: 10px; }
+
+.modal .success {
+  text-align: center; padding: 20px 0;
+}
+.modal .success .checkmark {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--accent); color: #fff; margin: 0 auto 20px;
+  display: grid; place-items: center; font-size: 32px;
+  animation: bounce .5s cubic-bezier(.3,1.4,.4,1);
+}
+@keyframes bounce { 0% { transform: scale(0) } 100% { transform: scale(1) } }
+
+/* Tweaks panel */
+.tweaks {
+  position: fixed; bottom: 24px; right: 24px;
+  background: var(--bg-card); border: 1px solid var(--rule);
+  border-radius: 14px; padding: 18px; z-index: 60;
+  box-shadow: var(--shadow-md);
+  width: 260px; font-size: 13px;
+  animation: pop .25s cubic-bezier(.2,.9,.3,1.2);
+}
+.tweaks h4 { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 14px; color: var(--muted); }
+.tweak-group { margin-bottom: 14px; }
+.tweak-group label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.08em; }
+.tweak-swatches { display: flex; gap: 8px; }
+.tweak-swatch {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 2px solid transparent; transition: border-color .15s ease, transform .15s ease;
+}
+.tweak-swatch:hover { transform: scale(1.08); }
+.tweak-swatch.active { border-color: var(--ink); }
+.tweak-segments {
+  display: flex; background: var(--bg-sunken); border-radius: 8px; padding: 3px;
+}
+.tweak-segments button {
+  flex: 1; padding: 6px 8px; font-size: 12px; border-radius: 6px;
+  color: var(--muted);
+}
+.tweak-segments button.active { background: var(--bg-card); color: var(--ink); box-shadow: var(--shadow-sm); }
+.tweak-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.tweak-toggle .switch {
+  width: 36px; height: 20px; border-radius: 999px; background: var(--rule);
+  position: relative; transition: background .2s ease;
+}
+.tweak-toggle .switch.on { background: var(--primary); }
+.tweak-toggle .switch::after {
+  content: ""; position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px; border-radius: 50%; background: #fff;
+  transition: transform .2s ease;
+}
+.tweak-toggle .switch.on::after { transform: translateX(16px); }
+
+</style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    window.TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "accent": "coral",
+      "heroVariant": "editorial",
+      "showStats": true,
+      "density": "comfortable"
+    }/*EDITMODE-END*/;
+  </script>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel">
+
+// === src/primitives.jsx ===
+// Shared primitives + icons
+const { useState, useEffect, useRef, useMemo } = React;
+
+// Minimal line icons, drawn in code — no emoji, no complex SVGs
+const Icon = ({ name, size = 18, stroke = 1.6 }) => {
+  const s = size;
+  const common = {
+    width: s, height: s, viewBox: "0 0 24 24",
+    fill: "none", stroke: "currentColor", strokeWidth: stroke,
+    strokeLinecap: "round", strokeLinejoin: "round"
+  };
+  switch (name) {
+    case "arrow-right":
+      return <svg {...common}><path d="M5 12h14M13 6l6 6-6 6"/></svg>;
+    case "arrow-upright":
+      return <svg {...common}><path d="M7 17L17 7M8 7h9v9"/></svg>;
+    case "plus":
+      return <svg {...common}><path d="M12 5v14M5 12h14"/></svg>;
+    case "close":
+      return <svg {...common}><path d="M6 6l12 12M6 18L18 6"/></svg>;
+    case "check":
+      return <svg {...common}><path d="M5 12l5 5L20 7"/></svg>;
+    case "globe":
+      return <svg {...common}><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>;
+    case "code":
+      return <svg {...common}><path d="M8 6l-5 6 5 6M16 6l5 6-5 6M14 4l-4 16"/></svg>;
+    case "chat":
+      return <svg {...common}><path d="M21 12a8 8 0 1 1-3.2-6.4L21 4l-1.2 3.8A8 8 0 0 1 21 12z"/></svg>;
+    case "briefcase":
+      return <svg {...common}><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/></svg>;
+    case "clock":
+      return <svg {...common}><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>;
+    case "spark":
+      return <svg {...common}><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></svg>;
+    case "compass":
+      return <svg {...common}><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6z"/></svg>;
+    case "shield":
+      return <svg {...common}><path d="M12 3l8 3v6c0 5-4 8-8 9-4-1-8-4-8-9V6z"/></svg>;
+    case "doc":
+      return <svg {...common}><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h6"/></svg>;
+    default: return null;
+  }
+};
+
+window.Icon = Icon;
+
+
+// === src/nav.jsx ===
+const Nav = ({ onApply, activeSection }) => {
+  const links = [
+    { id: "program", label: "Program" },
+    { id: "how", label: "How it works" },
+    { id: "talent", label: "Talent" },
+    { id: "roadmap", label: "Roadmap" },
+    { id: "stories", label: "Stories" },
+    { id: "faq", label: "FAQ" },
+  ];
+  return (
+    <header className="nav">
+      <div className="container nav-inner">
+        <div className="nav-left">
+          <a href="#top" className="brand">
+            <span className="brand-mark">c</span>
+            <span>Code in Canada</span>
+          </a>
+          <nav className="nav-links">
+            {links.map(l => (
+              <a key={l.id} href={`#${l.id}`}
+                 className={activeSection === l.id ? "active" : ""}>
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+        <div className="nav-right">
+          <a className="lang" href="#pt"><Icon name="globe" size={14} /> &nbsp;EN / PT</a>
+          <button className="btn btn-ghost" onClick={onApply}>Sign in</button>
+          <button className="btn btn-primary" onClick={onApply}>Apply now <Icon name="arrow-right" size={14} /></button>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+window.Nav = Nav;
+
+
+// === src/hero.jsx ===
+const Hero = ({ onApply, variant = "editorial" }) => {
+  return (
+    <section className="hero" id="top">
+      <div className="container">
+        <div className="hero-grid">
+          <div>
+            <div className="pill" style={{ marginBottom: 28 }}>
+              <span className="bullet"></span>
+              Cohort 04 · Applications open · Closes May 14
+            </div>
+            {variant === "editorial" && (
+              <h1>
+                North-bound<br/>
+                <em>engineering</em> <span className="accent">talent,</span><br/>
+                from São Paulo<br/>
+                to Toronto.
+              </h1>
+            )}
+            {variant === "direct" && (
+              <h1>
+                Hire the top <span className="accent">1%</span><br/>
+                of <em>Brazilian</em><br/>
+                engineers.
+              </h1>
+            )}
+            {variant === "bold" && (
+              <h1>
+                Brazil&apos;s best<br/>
+                engineers.<br/>
+                <em>Ready</em> <span className="accent">for</span><br/>
+                North America.
+              </h1>
+            )}
+            <p className="hero-sub">
+              Code in Canada matches rigorously-vetted Brazilian engineers with North American
+              companies — on aligned time zones, with work authorization, English fluency, and
+              a 12-week immersion before they join your team.
+            </p>
+            <div className="hero-cta">
+              <button className="btn btn-primary btn-lg" onClick={onApply}>
+                Apply for Cohort 04 <Icon name="arrow-right" size={15} />
+              </button>
+              <a href="#how" className="btn btn-ghost btn-lg">
+                How it works <Icon name="arrow-upright" size={14} />
+              </a>
+            </div>
+            <div className="hero-meta">
+              <span><strong>12 weeks</strong> immersion</span>
+              <span><strong>EST / PST</strong> aligned</span>
+              <span><strong>No recruiter fees</strong> for founding members</span>
+            </div>
+          </div>
+
+          <aside className="hero-card">
+            <div className="hero-card-head">
+              <span>Cohort 04 · 2026</span>
+              <span>Live</span>
+            </div>
+            <div className="hero-card-row">
+              <span className="k">Applications</span>
+              <span className="v">Open</span>
+            </div>
+            <div className="hero-card-row">
+              <span className="k">Applicants so far</span>
+              <span className="v big">2,147</span>
+            </div>
+            <div className="hero-card-row">
+              <span className="k">Seats</span>
+              <span className="v">30 <span style={{color:"var(--muted)"}}>/ 30</span></span>
+            </div>
+            <div className="hero-card-row">
+              <span className="k">Closes</span>
+              <span className="v">May 14, 2026</span>
+            </div>
+            <div className="hero-card-row">
+              <span className="k">Starts</span>
+              <span className="v">Jun 02, 2026</span>
+            </div>
+            <div className="flag-stripe" aria-hidden="true">
+              <div></div><div></div><div></div>
+            </div>
+            <div className="hero-foot">
+              <span className="live">Accepting</span>
+              <span>·</span>
+              <span>São Paulo · Toronto</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Ticker = () => {
+  const items = [
+    "São Paulo → Toronto",
+    "Rio → New York",
+    "Belo Horizonte → San Francisco",
+    "Curitiba → Vancouver",
+    "Porto Alegre → Austin",
+    "Recife → Montreal",
+    "Florianópolis → Seattle",
+    "Brasília → Boston",
+  ];
+  const doubled = [...items, ...items];
+  return (
+    <div className="ticker" aria-hidden="true">
+      <div className="ticker-track">
+        {doubled.map((x, i) => <span key={i}>{x}</span>)}
+      </div>
+    </div>
+  );
+};
+
+const Stats = () => (
+  <section className="section-sm">
+    <div className="container">
+      <div className="stats">
+        <div>
+          <div className="stat-num">312<small>+</small></div>
+          <div className="stat-label">Engineers placed since 2023</div>
+        </div>
+        <div>
+          <div className="stat-num">94<small>%</small></div>
+          <div className="stat-label">Retention at 12 months</div>
+        </div>
+        <div>
+          <div className="stat-num">1.8<small>%</small></div>
+          <div className="stat-label">Application acceptance rate</div>
+        </div>
+        <div>
+          <div className="stat-num">42</div>
+          <div className="stat-label">Partner companies in US & Canada</div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+const LogoRow = () => {
+  // Original, plausible partner wordmarks — not real brands
+  const logos = ["Northwind", "Klarity", "Mapleway", "Tern", "Vector/Ops", "Quay"];
+  return (
+    <section className="section-sm" style={{ paddingTop: 0 }}>
+      <div className="container">
+        <div className="eyebrow" style={{ marginBottom: 24, textAlign: "center" }}>
+          <span className="dot"></span>Trusted by teams from seed to series C
+        </div>
+        <div className="logos">
+          {logos.map((l, i) => <div key={i}>{l}</div>)}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+window.Hero = Hero;
+window.Ticker = Ticker;
+window.Stats = Stats;
+window.LogoRow = LogoRow;
+
+
+// === src/how.jsx ===
+const How = ({ onApply }) => {
+  const steps = [
+    {
+      num: "01",
+      tag: "Apply · 20 min",
+      title: "Tell us your story.",
+      desc: "A short written application: your background, a code sample, and the role you want. English + Portuguese accepted.",
+    },
+    {
+      num: "02",
+      tag: "Screen · 1 week",
+      title: "Technical + language screens.",
+      desc: "A live pairing session with a senior engineer, and a structured English interview. We score on reasoning — not trivia.",
+    },
+    {
+      num: "03",
+      tag: "Offer · 2 weeks",
+      title: "Cohort offer + match call.",
+      desc: "The top 1.8% receive a cohort offer. You meet 3 partner companies aligned with your stack and career stage.",
+    },
+    {
+      num: "04",
+      tag: "Relocate · 4 weeks",
+      title: "We handle the visas.",
+      desc: "C-11, GTS, or TN — our immigration partners file everything. You focus on the technical prep.",
+    },
+    {
+      num: "05",
+      tag: "Immerse · 12 weeks",
+      title: "12-week onboarding in Toronto.",
+      desc: "Paid residency with a partner company. Mentorship, systems design, async writing, and a real shipped project.",
+    },
+    {
+      num: "06",
+      tag: "Ship · Day 1",
+      title: "Full-time hire. No placement fee.",
+      desc: "Convert to a full-time role on day 85. Founding-member companies pay zero placement fees for the first three hires.",
+    },
+  ];
+
+  return (
+    <section className="section" id="how">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>How it works</div>
+            <h2>Six steps from<br/>application to offer.</h2>
+          </div>
+          <p className="lede">
+            We run three cohorts a year. Every engineer goes through the same rigorous pipeline —
+            no shortcuts, no exceptions. Companies meet candidates only after they&apos;ve cleared every bar.
+          </p>
+        </div>
+
+        <div className="steps">
+          {steps.map(s => (
+            <article key={s.num} className="step">
+              <div className="step-num">{s.num}<span>STEP</span></div>
+              <div>
+                <h3>{s.title}</h3>
+                <div className="step-tag">{s.tag}</div>
+              </div>
+              <p className="desc">{s.desc}</p>
+            </article>
+          ))}
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center", marginTop: 48 }}>
+          <button className="btn btn-primary btn-lg" onClick={onApply}>
+            Start your application <Icon name="arrow-right" size={15} />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+window.How = How;
+
+
+// === src/talent.jsx ===
+const Talent = ({ onApply }) => {
+  const [tab, setTab] = useState("companies");
+  const companyItems = [
+    {
+      icon: "code",
+      title: "Pre-vetted at 1.8% rate.",
+      desc: "Every engineer clears a live pairing round, systems design, and a written async task before you meet them.",
+    },
+    {
+      icon: "globe",
+      title: "Time-zone aligned.",
+      desc: "Brazil sits on EST and one hour off PST. Real overlap, real pairing, real standups — no late-night handoffs.",
+    },
+    {
+      icon: "shield",
+      title: "We handle the paperwork.",
+      desc: "Work authorization, immigration, payroll, and compliance — all done before day one. You hire, we handle the rest.",
+    },
+    {
+      icon: "briefcase",
+      title: "Try before you hire.",
+      desc: "A paid 12-week residency. If it&apos;s not a fit by week 8, you walk away — no fee, no friction.",
+    },
+    {
+      icon: "clock",
+      title: "Ready in 6 weeks.",
+      desc: "From signed LOI to first standup. Most engineers are productive on day one thanks to the immersion program.",
+    },
+    {
+      icon: "chat",
+      title: "English-fluent, async-literate.",
+      desc: "Every candidate passes a structured English evaluation and a written-communication task. No translation debt.",
+    },
+  ];
+
+  const engineerItems = [
+    {
+      icon: "compass",
+      title: "Build your North American career.",
+      desc: "Work on real products shipped to millions — with mentorship from senior engineers at partner companies.",
+    },
+    {
+      icon: "shield",
+      title: "Relocation, done for you.",
+      desc: "Visa, flights, first-month housing in Toronto, and a $3,000 CAD relocation stipend — covered.",
+    },
+    {
+      icon: "spark",
+      title: "12 weeks of immersion.",
+      desc: "Paid training in systems design, async writing, and technical English. Plus 1-on-1 career coaching.",
+    },
+    {
+      icon: "briefcase",
+      title: "Offer by day 85.",
+      desc: "Convert to full-time with the partner company. Median offer: CAD $115K + equity + benefits.",
+    },
+    {
+      icon: "globe",
+      title: "Canadian PR pathway.",
+      desc: "Eligible for Canada&apos;s Express Entry within 12 months. We cover legal counsel for your application.",
+    },
+    {
+      icon: "chat",
+      title: "An alumni network that lasts.",
+      desc: "312 Brazilian engineers across 42 North American companies. Slack, in-person meetups, internal hiring pipeline.",
+    },
+  ];
+
+  const items = tab === "companies" ? companyItems : engineerItems;
+
+  return (
+    <section className="section" id="talent" style={{ background: "var(--bg-sunken)" }}>
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>For companies &amp; engineers</div>
+            <h2>Two sides, one<br/>shared <em className="serif" style={{ fontStyle: "italic" }}>standard.</em></h2>
+          </div>
+          <div>
+            <p className="lede" style={{ marginBottom: 24 }}>
+              Whether you&apos;re hiring or being hired, the bar is the same. Toggle to see what you get.
+            </p>
+            <div className="tweak-segments" style={{ maxWidth: 320 }}>
+              <button
+                className={tab === "companies" ? "active" : ""}
+                onClick={() => setTab("companies")}
+              >For companies</button>
+              <button
+                className={tab === "engineers" ? "active" : ""}
+                onClick={() => setTab("engineers")}
+              >For engineers</button>
+            </div>
+          </div>
+        </div>
+
+        <div className="talent">
+          {items.map((it, i) => (
+            <article key={`${tab}-${i}`} className="talent-card">
+              <div className="talent-icon"><Icon name={it.icon} size={20} /></div>
+              <h3>{it.title}</h3>
+              <p dangerouslySetInnerHTML={{ __html: it.desc }} />
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+window.Talent = Talent;
+
+
+// === src/roadmap.jsx ===
+const Roadmap = () => {
+  const steps = [
+    {
+      week: "Week 1–2",
+      title: "Landing",
+      meta: "Arrival · Orientation",
+      bullets: [
+        "Airport pickup, SIM cards, and bank accounts",
+        "First-month housing in downtown Toronto",
+        "Cohort orientation + mentor pairing",
+        "Health insurance + legal onboarding",
+      ],
+      short: "Land in Toronto. Get set up.",
+    },
+    {
+      week: "Week 3–5",
+      title: "Foundations",
+      meta: "Systems · Async · English",
+      bullets: [
+        "Systems design: from CAP theorem to real rollouts",
+        "Async writing: RFCs, design docs, code reviews",
+        "English fluency lab: 1:1 speaking practice",
+        "Shadowing: sit in on real team meetings",
+      ],
+      short: "Level up the fundamentals.",
+    },
+    {
+      week: "Week 6–9",
+      title: "Residency",
+      meta: "Embedded with partner team",
+      bullets: [
+        "Assigned a real scoped project, shipped to production",
+        "Daily standups with your future team",
+        "Weekly 1:1s with your staff-level mentor",
+        "Code reviews from two senior engineers",
+      ],
+      short: "Ship real code with a real team.",
+    },
+    {
+      week: "Week 10–11",
+      title: "Match",
+      meta: "Company decisions · Offers",
+      bullets: [
+        "Feedback from all sides — you, the team, the mentor",
+        "Offer decision by end of week 10",
+        "Negotiation coaching from the Code in Canada team",
+        "Visa status transitions to permanent work authorization",
+      ],
+      short: "Decisions on both sides.",
+    },
+    {
+      week: "Week 12+",
+      title: "Launch",
+      meta: "Full-time · Day 1",
+      bullets: [
+        "Full-time start with your partner company",
+        "Alumni network access — 312 engineers, 42 companies",
+        "Quarterly check-ins for your first year",
+        "Eligible for Canadian PR pathway within 12 months",
+      ],
+      short: "Full-time, with alumni for life.",
+    },
+  ];
+
+  const [active, setActive] = useState(2); // Residency as default highlighted
+
+  const cur = steps[active];
+
+  return (
+    <section className="roadmap" id="roadmap">
+      <div className="container">
+        <div className="section-head" style={{ marginBottom: 40 }}>
+          <div>
+            <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>The 12-week roadmap</div>
+            <h2>From <em className="serif" style={{ fontStyle: "italic" }}>landing</em><br/>to launch.</h2>
+          </div>
+          <p className="lede">
+            A paid, structured immersion program. Every engineer follows the same five-phase path
+            — designed with input from staff engineers at Shopify, Stripe, and Wealthsimple.
+          </p>
+        </div>
+
+        <div className="roadmap-track" role="tablist">
+          <div className="roadmap-line" />
+          {steps.map((s, i) => (
+            <div
+              key={i}
+              role="tab"
+              aria-selected={i === active}
+              className={`roadmap-step ${i === active ? "active" : i < active ? "done" : ""}`}
+              onClick={() => setActive(i)}
+              onKeyDown={(e) => e.key === "Enter" && setActive(i)}
+              tabIndex={0}
+            >
+              <div className="week">{s.week}</div>
+              <h4>{s.title}</h4>
+              <p>{s.short}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="roadmap-detail">
+          <div>
+            <div className="meta">{cur.week} · {cur.meta}</div>
+            <h3>{cur.title}</h3>
+            <p style={{ color: "var(--muted)", fontSize: 15 }}>
+              Phase {active + 1} of 5. Click any step above to explore.
+            </p>
+          </div>
+          <ul className="bullets">
+            {cur.bullets.map((b, i) => <li key={i}>{b}</li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+window.Roadmap = Roadmap;
+
+
+// === src/stories.jsx ===
+const Stories = () => {
+  const items = [
+    {
+      quote: "We went from 'we can't find senior Elixir people' to a team of four in one cohort. The bar is absurdly high.",
+      name: "Priya Natarajan",
+      role: "VP ENG · NORTHWIND",
+      initial: "P",
+    },
+    {
+      quote: "I landed in Toronto on a Tuesday and shipped to production by Friday of week 6. The residency is not a bootcamp — it's the real thing.",
+      name: "Lucas Ferreira",
+      role: "SRE · COHORT 02",
+      initial: "L",
+    },
+    {
+      quote: "Three of our best engineers came through Code in Canada. We stopped using traditional recruiters entirely.",
+      name: "Jordan Bell",
+      role: "HEAD OF TALENT · KLARITY",
+      initial: "J",
+    },
+  ];
+
+  return (
+    <section className="section" id="stories">
+      <div className="container">
+        <div className="section-head">
+          <div>
+            <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>Stories</div>
+            <h2>Teams who hired.<br/>Engineers who shipped.</h2>
+          </div>
+          <p className="lede">
+            A few words from founders, hiring managers, and alumni across the cohorts.
+          </p>
+        </div>
+
+        <div className="stories">
+          {items.map((s, i) => (
+            <article key={i} className="story">
+              <p className="quote">{s.quote}</p>
+              <div className="byline">
+                <div className="avatar">{s.initial}</div>
+                <div>
+                  <div className="name">{s.name}</div>
+                  <div className="role">{s.role}</div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+window.Stories = Stories;
+
+
+// === src/faq.jsx ===
+const FAQ = () => {
+  const items = [
+    {
+      q: "Who is Code in Canada for?",
+      a: "Two audiences. On one side: Brazilian engineers with 3+ years of experience who want to build their career in North America. On the other: North American companies (Canadian or US) hiring senior engineers who struggle to find time-zone aligned, English-fluent talent. We match them through a cohort-based program."
+    },
+    {
+      q: "What roles do you place?",
+      a: "Backend, full-stack, mobile, infrastructure/SRE, data engineering, and ML engineering. We occasionally place design engineers and engineering managers. We don't currently place non-engineering roles."
+    },
+    {
+      q: "How much does it cost companies?",
+      a: "Founding-member companies (the first 50) pay zero placement fees for their first three hires. After that, it's a one-time flat fee — no percentage of salary. We also cover the full cost of the 12-week residency program for the engineer."
+    },
+    {
+      q: "Do engineers pay anything?",
+      a: "No. The program is free for engineers — including flights, first-month housing in Toronto, relocation stipend, and paid training. You're paid a living stipend during the residency, and your full-time salary starts on week 12."
+    },
+    {
+      q: "What about visas and work authorization?",
+      a: "Our immigration partners handle the full pipeline: C-11 (Canada), GTS (Global Talent Stream), or TN (for placements in the US). Most engineers land in Canada on a 2-year open work permit and are eligible for Express Entry (permanent residency) within 12 months."
+    },
+    {
+      q: "Why Canada, not directly to the US?",
+      a: "Canada's immigration pathways are faster, more predictable, and don't rely on a lottery. Engineers who start in Toronto can later transfer to US offices via TN visa. Many companies we work with have offices in both countries."
+    },
+    {
+      q: "What's the application timeline?",
+      a: "From application to offer: roughly 8-10 weeks. From offer to landing in Toronto: another 4-6 weeks (mostly visa processing). The 12-week residency starts on a fixed cohort start date — currently June, October, and February."
+    },
+  ];
+
+  const [open, setOpen] = useState(0);
+
+  return (
+    <section className="section" id="faq">
+      <div className="container-tight">
+        <div className="section-head">
+          <div>
+            <div className="eyebrow" style={{ marginBottom: 18 }}><span className="dot"></span>Questions</div>
+            <h2>Things we&apos;re<br/>often asked.</h2>
+          </div>
+          <p className="lede">
+            If there&apos;s something we haven&apos;t covered, reach out at <a style={{ textDecoration: "underline" }} href="#">hello@codein.ca</a> — we answer everything within 24 hours.
+          </p>
+        </div>
+
+        <div>
+          {items.map((it, i) => (
+            <div key={i} className={`faq-item ${open === i ? "open" : ""}`}>
+              <button
+                className="faq-q"
+                onClick={() => setOpen(open === i ? -1 : i)}
+                aria-expanded={open === i}
+              >
+                <h3>{it.q}</h3>
+                <span className="faq-toggle"><Icon name="plus" size={16} /></span>
+              </button>
+              <div className="faq-a"><p>{it.a}</p></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+window.FAQ = FAQ;
+
+
+// === src/apply.jsx ===
+const ApplyModal = ({ open, onClose, audience: initialAudience = "engineer" }) => {
+  const [step, setStep] = useState(() => {
+    const saved = localStorage.getItem("apply-step");
+    return saved ? parseInt(saved) : 0;
+  });
+  const [audience, setAudience] = useState(initialAudience);
+  const [form, setForm] = useState({
+    name: "", email: "", company: "", role: "",
+    years: "", stack: [], location: "",
+    motivation: "",
+  });
+
+  useEffect(() => {
+    localStorage.setItem("apply-step", String(step));
+  }, [step]);
+
+  if (!open) return null;
+
+  const stacks = ["Backend", "Frontend", "Full-stack", "Mobile", "Infra/SRE", "Data", "ML"];
+  const toggleStack = (s) => {
+    setForm(f => ({
+      ...f,
+      stack: f.stack.includes(s) ? f.stack.filter(x => x !== s) : [...f.stack, s]
+    }));
+  };
+
+  const steps = audience === "engineer"
+    ? ["Audience", "About you", "Your stack", "Review"]
+    : ["Audience", "About you", "Hiring needs", "Review"];
+
+  const close = () => { onClose(); };
+  const next = () => setStep(Math.min(step + 1, steps.length));
+  const back = () => setStep(Math.max(step - 1, 0));
+  const reset = () => { setStep(0); setForm({ name:"", email:"", company:"", role:"", years:"", stack:[], location:"", motivation:"" }); };
+
+  return (
+    <div className="modal-backdrop" onClick={close}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <button className="modal-close" onClick={close} aria-label="Close"><Icon name="close" size={16}/></button>
+
+        {step < steps.length && (
+          <div className="modal-steps">
+            {steps.map((_, i) => (
+              <div key={i} className={i === step ? "active" : i < step ? "done" : ""} />
+            ))}
+          </div>
+        )}
+
+        {step === 0 && (
+          <>
+            <h3>Who are you?</h3>
+            <p className="sub">Pick the path that fits. You can switch later.</p>
+            <div style={{ display: "grid", gap: 10 }}>
+              <button
+                className={`chip ${audience === "engineer" ? "selected" : ""}`}
+                style={{ padding: "18px 20px", textAlign: "left", borderRadius: 12, fontSize: 15 }}
+                onClick={() => setAudience("engineer")}
+              >
+                <div style={{ fontWeight: 500, marginBottom: 4 }}>I&apos;m a Brazilian engineer</div>
+                <div style={{ fontSize: 13, opacity: 0.7 }}>Applying to join a cohort and relocate to Canada.</div>
+              </button>
+              <button
+                className={`chip ${audience === "company" ? "selected" : ""}`}
+                style={{ padding: "18px 20px", textAlign: "left", borderRadius: 12, fontSize: 15 }}
+                onClick={() => setAudience("company")}
+              >
+                <div style={{ fontWeight: 500, marginBottom: 4 }}>I&apos;m hiring engineers</div>
+                <div style={{ fontSize: 13, opacity: 0.7 }}>Looking to onboard cohort engineers onto my team.</div>
+              </button>
+            </div>
+            <div className="modal-actions">
+              <button className="btn btn-ghost" onClick={close}>Cancel</button>
+              <button className="btn btn-primary" onClick={next}>Continue <Icon name="arrow-right" size={14}/></button>
+            </div>
+          </>
+        )}
+
+        {step === 1 && (
+          <>
+            <h3>A bit about you.</h3>
+            <p className="sub">We&apos;ll use this to route your application.</p>
+            <div className="field-row">
+              <div className="field">
+                <label>Full name</label>
+                <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Maria Silva" />
+              </div>
+              <div className="field">
+                <label>Email</label>
+                <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="maria@example.com" />
+              </div>
+            </div>
+            {audience === "engineer" ? (
+              <div className="field-row">
+                <div className="field">
+                  <label>Years of experience</label>
+                  <select value={form.years} onChange={(e) => setForm({ ...form, years: e.target.value })}>
+                    <option value="">Select</option>
+                    <option>3–5 years</option>
+                    <option>5–8 years</option>
+                    <option>8–12 years</option>
+                    <option>12+ years</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label>Current city</label>
+                  <input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} placeholder="São Paulo, BR" />
+                </div>
+              </div>
+            ) : (
+              <div className="field-row">
+                <div className="field">
+                  <label>Company</label>
+                  <input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} placeholder="Northwind Inc." />
+                </div>
+                <div className="field">
+                  <label>Your role</label>
+                  <input value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} placeholder="Head of Engineering" />
+                </div>
+              </div>
+            )}
+            <div className="modal-actions">
+              <button className="btn btn-ghost" onClick={back}>Back</button>
+              <button className="btn btn-primary" onClick={next}>Continue <Icon name="arrow-right" size={14}/></button>
+            </div>
+          </>
+        )}
+
+        {step === 2 && (
+          <>
+            <h3>{audience === "engineer" ? "What do you build?" : "Who are you hiring?"}</h3>
+            <p className="sub">Pick everything that applies.</p>
+            <div className="chips" style={{ marginBottom: 18 }}>
+              {stacks.map(s => (
+                <button key={s}
+                  className={`chip ${form.stack.includes(s) ? "selected" : ""}`}
+                  onClick={() => toggleStack(s)}>{s}</button>
+              ))}
+            </div>
+            <div className="field">
+              <label>{audience === "engineer" ? "Why Code in Canada?" : "What roles are hardest to fill?"}</label>
+              <textarea
+                value={form.motivation}
+                onChange={(e) => setForm({ ...form, motivation: e.target.value })}
+                placeholder={audience === "engineer" ? "Tell us in a few sentences…" : "Tell us about the gaps on your team…"}
+              />
+            </div>
+            <div className="modal-actions">
+              <button className="btn btn-ghost" onClick={back}>Back</button>
+              <button className="btn btn-primary" onClick={next}>Continue <Icon name="arrow-right" size={14}/></button>
+            </div>
+          </>
+        )}
+
+        {step === 3 && (
+          <>
+            <h3>Review &amp; submit.</h3>
+            <p className="sub">One quick check before you send.</p>
+            <div style={{ background: "var(--bg-sunken)", borderRadius: 10, padding: 16, fontSize: 14, marginBottom: 18 }}>
+              <div style={{ display: "grid", gap: 8 }}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span style={{ color: "var(--muted)" }}>Path</span>
+                  <span style={{ fontWeight: 500 }}>{audience === "engineer" ? "Engineer application" : "Hiring partnership"}</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span style={{ color: "var(--muted)" }}>Name</span>
+                  <span style={{ fontWeight: 500 }}>{form.name || "—"}</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span style={{ color: "var(--muted)" }}>Email</span>
+                  <span style={{ fontWeight: 500 }}>{form.email || "—"}</span>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span style={{ color: "var(--muted)" }}>Stack</span>
+                  <span style={{ fontWeight: 500 }}>{form.stack.join(", ") || "—"}</span>
+                </div>
+              </div>
+            </div>
+            <div className="modal-actions">
+              <button className="btn btn-ghost" onClick={back}>Back</button>
+              <button className="btn btn-primary" onClick={next}>Submit application <Icon name="arrow-right" size={14}/></button>
+            </div>
+          </>
+        )}
+
+        {step >= steps.length && (
+          <>
+            <div className="success">
+              <div className="checkmark"><Icon name="check" size={28} /></div>
+              <h3 style={{ marginBottom: 8 }}>You&apos;re in the queue.</h3>
+              <p style={{ color: "var(--muted)", fontSize: 15, maxWidth: 360, margin: "0 auto" }}>
+                We review applications weekly. You&apos;ll hear back within 5 business days — look for an email from <strong style={{color: "var(--ink)"}}>hello@codein.ca</strong>.
+              </p>
+              <div style={{ display: "flex", gap: 10, justifyContent: "center", marginTop: 28 }}>
+                <button className="btn btn-ghost" onClick={() => { reset(); }}>Submit another</button>
+                <button className="btn btn-primary" onClick={() => { reset(); close(); }}>Done</button>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
+window.ApplyModal = ApplyModal;
+
+
+// === src/tweaks.jsx ===
+const Tweaks = ({ tweaks, setTweaks, onClose }) => {
+  const accents = [
+    { id: "coral", color: "#E4572E" },
+    { id: "maple", color: "#C33A2B" },
+    { id: "sun",   color: "#E8B84A" },
+    { id: "sky",   color: "#2E6AA8" },
+  ];
+  const heroes = [
+    { id: "editorial", label: "Editorial" },
+    { id: "direct",    label: "Direct" },
+    { id: "bold",      label: "Bold" },
+  ];
+  const densities = [
+    { id: "compact",     label: "Tight" },
+    { id: "comfortable", label: "Default" },
+    { id: "spacious",    label: "Airy" },
+  ];
+
+  const update = (k, v) => {
+    const next = { ...tweaks, [k]: v };
+    setTweaks(next);
+    window.parent.postMessage({ type: "__edit_mode_set_keys", edits: { [k]: v } }, "*");
+  };
+
+  return (
+    <div className="tweaks">
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom: 14 }}>
+        <h4 style={{ margin: 0 }}>Tweaks</h4>
+        <button onClick={onClose} style={{ color: "var(--muted)", padding: 4 }}><Icon name="close" size={14}/></button>
+      </div>
+
+      <div className="tweak-group">
+        <label>Accent color</label>
+        <div className="tweak-swatches">
+          {accents.map(a => (
+            <button key={a.id}
+              className={`tweak-swatch ${tweaks.accent === a.id ? "active" : ""}`}
+              style={{ background: a.color }}
+              onClick={() => update("accent", a.id)}
+              aria-label={a.id}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="tweak-group">
+        <label>Hero headline</label>
+        <div className="tweak-segments">
+          {heroes.map(h => (
+            <button key={h.id}
+              className={tweaks.heroVariant === h.id ? "active" : ""}
+              onClick={() => update("heroVariant", h.id)}>{h.label}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="tweak-group">
+        <label>Density</label>
+        <div className="tweak-segments">
+          {densities.map(d => (
+            <button key={d.id}
+              className={tweaks.density === d.id ? "active" : ""}
+              onClick={() => update("density", d.id)}>{d.label}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="tweak-group tweak-toggle">
+        <label style={{ margin: 0 }}>Show stats row</label>
+        <button
+          className={`switch ${tweaks.showStats ? "on" : ""}`}
+          onClick={() => update("showStats", !tweaks.showStats)}
+          aria-pressed={tweaks.showStats}
+        />
+      </div>
+    </div>
+  );
+};
+
+window.Tweaks = Tweaks;
+
+
+// === src/app.jsx ===
+const Footer = () => (
+  <footer className="footer">
+    <div className="container">
+      <div className="footer-grid">
+        <div className="footer-brand">
+          <h3>Code in <em style={{ fontStyle: "italic", color: "var(--accent)" }}>Canada.</em></h3>
+          <p>
+            A Canadian startup helping the best Brazilian engineers build their careers with
+            North American teams. Based in Toronto &amp; São Paulo.
+          </p>
+          <div style={{ marginTop: 24, display: "flex", gap: 12 }}>
+            <div className="pill" style={{ background: "rgba(246,243,236,0.06)", color: "rgba(246,243,236,0.7)", borderColor: "rgba(246,243,236,0.12)" }}>
+              <span className="bullet" style={{ background: "var(--accent)" }}></span>
+              Now accepting Cohort 04
+            </div>
+          </div>
+        </div>
+        <div className="footer-col">
+          <h4>Program</h4>
+          <ul>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#talent">For companies</a></li>
+            <li><a href="#talent">For engineers</a></li>
+          </ul>
+        </div>
+        <div className="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Stories</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div className="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#">Visa guide</a></li>
+            <li><a href="#">Engineer handbook</a></li>
+            <li><a href="#">Employer brief</a></li>
+            <li><a href="#">Alumni</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="footer-bottom">
+        <div>© 2026 Code in Canada Inc.</div>
+        <div>Toronto · São Paulo</div>
+        <div>Privacy · Terms · hello@codein.ca</div>
+      </div>
+    </div>
+  </footer>
+);
+
+const CTABand = ({ onApply }) => (
+  <section className="cta-band">
+    <div className="container" style={{ position: "relative", zIndex: 1 }}>
+      <div style={{ maxWidth: 880 }}>
+        <div className="eyebrow" style={{ color: "rgba(246,243,236,0.6)", marginBottom: 24 }}>
+          <span className="dot"></span>Cohort 04 · Closes May 14
+        </div>
+        <h2>
+          The <em>next</em> great engineer<br/>
+          on your team is already<br/>
+          writing code tonight.
+        </h2>
+        <p>
+          Just in São Paulo, or Rio, or Belo Horizonte. Apply to Cohort 04 — or reach out to
+          partner with us as a hiring company.
+        </p>
+        <div className="cta-band-actions">
+          <button className="btn btn-primary btn-lg" onClick={onApply}>
+            Apply to Cohort 04 <Icon name="arrow-right" size={15}/>
+          </button>
+          <a href="#how" className="btn btn-ghost btn-lg">
+            Hire from Code in Canada <Icon name="arrow-upright" size={14}/>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div className="cta-watermark">ca</div>
+  </section>
+);
+
+const App = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [tweaks, setTweaks] = useState(window.TWEAK_DEFAULTS);
+  const [tweaksOpen, setTweaksOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("program");
+
+  // Apply tweaks to root
+  useEffect(() => {
+    document.body.setAttribute("data-accent", tweaks.accent);
+    document.body.setAttribute("data-density", tweaks.density);
+  }, [tweaks]);
+
+  // Edit-mode protocol
+  useEffect(() => {
+    const handler = (e) => {
+      if (!e.data || typeof e.data !== "object") return;
+      if (e.data.type === "__activate_edit_mode") setTweaksOpen(true);
+      if (e.data.type === "__deactivate_edit_mode") setTweaksOpen(false);
+      if (e.data.type === "__edit_mode_keys") {
+        if (e.data.keys) setTweaks(t => ({ ...t, ...e.data.keys }));
+      }
+    };
+    window.addEventListener("message", handler);
+    window.parent.postMessage({ type: "__edit_mode_available" }, "*");
+    return () => window.removeEventListener("message", handler);
+  }, []);
+
+  // Section-spy for nav highlighting
+  useEffect(() => {
+    const ids = ["program", "how", "talent", "roadmap", "stories", "faq"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) setActiveSection(e.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+    );
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const onApply = () => setModalOpen(true);
+
+  return (
+    <>
+      <Nav onApply={onApply} activeSection={activeSection} />
+      <main id="program">
+        <Hero onApply={onApply} variant={tweaks.heroVariant} />
+        <Ticker />
+        {tweaks.showStats && <Stats />}
+        <LogoRow />
+        <How onApply={onApply} />
+        <Talent onApply={onApply} />
+        <Roadmap />
+        <Stories />
+        <FAQ />
+        <CTABand onApply={onApply} />
+      </main>
+      <Footer />
+
+      <ApplyModal open={modalOpen} onClose={() => setModalOpen(false)} />
+
+      {tweaksOpen && (
+        <Tweaks tweaks={tweaks} setTweaks={setTweaks} onClose={() => setTweaksOpen(false)} />
+      )}
+    </>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+
+  </script>
+</body>
+</html>
