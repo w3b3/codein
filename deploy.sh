@@ -10,10 +10,10 @@ chmod 644 "$TMP"
 
 rsync -av --delete --exclude='.DS_Store' \
   assets \
-  xps15:/home/ds/home-server-setup/data/nginx/html/codein/
+  rv415:/home/ds/sites/codein.ca/
 
 rsync -av "$TMP" \
-  xps15:/home/ds/home-server-setup/data/nginx/html/codein/index.html
+  rv415:/home/ds/sites/codein.ca/index.html
 
 rm "$TMP"
 
